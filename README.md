@@ -5,5 +5,6 @@
 - [Rota Washington](https://fcarvalhodev.github.io/rota-washington/)
 - [Rota Master](https://fcarvalhodev.github.io/rota-master/)
 - [Rota Curitiba](https://fcarvalhodev.github.io/rota-curitiba/)
+- [Rota da Fé](https://fcarvalhodev.github.io/rota-da-fe/)
 
 Todas usam as mesmas etiquetas de comprovação e a mesma barra de navegação no topo.
