@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rotas</title>
-<meta name="description" content="Dossiês sobre a eleição de 2026, cada um seguindo uma rota: Washington e Master. Todos com fontes e o mesmo padrão de etiquetas de comprovação.">
+<meta name="description" content="Dossiês sobre a eleição de 2026, cada um seguindo uma rota: Washington, Master e Curitiba. Todos com fontes e o mesmo padrão de etiquetas de comprovação.">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -10,7 +10,7 @@
 :root{
   --bg:#eef0f1; --paper:#f9fafa; --ink:#18202a; --muted:#5a6470; --line:#cfd5db;
   --accent:#18202a;
-  --r-washington:#0e7c74; --r-master:#8a6512;
+  --r-washington:#0e7c74; --r-master:#8a6512; --r-curitiba:#2f6b4f;
   --doc:#18202a; --alleg:#a3501a; --alleg-soft:#f8e6d7; --open:#5b4bb0; --open-soft:#e7e3f6;
   --display:"Archivo","Arial Narrow",Impact,sans-serif;
   --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -18,11 +18,11 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
-  --r-washington:#4cc3b6; --r-master:#e0b552;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a;
   --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
-  --r-washington:#4cc3b6; --r-master:#e0b552;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a;
   --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55}
@@ -35,7 +35,7 @@ h2{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:clamp(3
 
 /* transit line */
 .line{position:relative;display:grid;gap:0;padding-block:28px 8px}
-.line::before{content:"";position:absolute;left:23px;top:44px;bottom:44px;width:6px;border-radius:3px;background:linear-gradient(var(--r-washington),var(--r-master))}
+.line::before{content:"";position:absolute;left:23px;top:44px;bottom:44px;width:6px;border-radius:3px;background:linear-gradient(var(--r-washington),var(--r-master),var(--r-curitiba))}
 .stop{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:18px;padding-block:14px;text-decoration:none;color:var(--ink)}
 .stop .pin{width:52px;height:52px;border-radius:50%;background:var(--paper);border:6px solid var(--c);position:relative;z-index:1;margin-top:6px;transition:transform .2s}
 .stop:hover .pin,.stop:focus-visible .pin{transform:scale(1.12)}
@@ -84,6 +84,12 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
       <span class="body"><span class="code">CNF → GRU → BSB ✕ MLA</span><strong>Master</strong>
         <p>O caso Vorcaro e o Banco Master: quem aparece no Supremo, no governo e no Congresso, e por que o caso Master, a fraude do INSS e os inquéritos de Lulinha são três coisas diferentes.</p>
         <span class="meta"><span>3 páginas</span><span>2019–2026</span></span><span class="go">Abrir rota →</span></span>
+    </a>
+    <a class="stop" style="--c:var(--r-curitiba)" href="https://fcarvalhodev.github.io/rota-curitiba/">
+      <span class="pin" aria-hidden="true"></span>
+      <span class="body"><span class="code">CWB → POA → CWB → BSB</span><strong>Curitiba</strong>
+        <p>Lula e Lulinha na Lava Jato e depois dela: o que acusaram, o que a Justiça decidiu e o que ficou, processo por processo. Inclui o que pesa contra, com o mesmo critério.</p>
+        <span class="meta"><span>2 páginas</span><span>2012–2026</span></span><span class="go">Abrir rota →</span></span>
     </a>
     <div class="stop next" aria-label="Próxima rota em preparação">
       <span class="pin" aria-hidden="true"></span>
