@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rotas</title>
-<meta name="description" content="Dossiês sobre a eleição de 2026, cada um seguindo uma rota: Washington, Master, Curitiba, Fé, Esplanada, Itamaraty e Picanha. Todos com fontes e o mesmo padrão de etiquetas de comprovação.">
+<meta name="description" content="Dossiês sobre a eleição de 2026, cada um seguindo uma rota: Washington, Master, Curitiba, Fé, Esplanada, Itamaraty, Picanha e IBGE. Todos com fontes e o mesmo padrão de etiquetas de comprovação.">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -10,7 +10,7 @@
 :root{
   --bg:#eef0f1; --paper:#f9fafa; --ink:#18202a; --muted:#5a6470; --line:#cfd5db;
   --accent:#18202a;
-  --r-washington:#0e7c74; --r-master:#8a6512; --r-curitiba:#2f6b4f; --r-fe:#5b3a8c; --r-esplanada:#a8431e; --r-itamaraty:#9b2c6b; --r-picanha:#4f6b17;
+  --r-washington:#0e7c74; --r-master:#8a6512; --r-curitiba:#2f6b4f; --r-fe:#5b3a8c; --r-esplanada:#a8431e; --r-itamaraty:#9b2c6b; --r-picanha:#4f6b17; --r-ibge:#2c4a7e;
   --doc:#18202a; --alleg:#a3501a; --alleg-soft:#f8e6d7; --open:#5b4bb0; --open-soft:#e7e3f6;
   --display:"Archivo","Arial Narrow",Impact,sans-serif;
   --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -18,11 +18,11 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
-  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6;
   --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
-  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6;
   --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55}
@@ -35,7 +35,7 @@ h2{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:clamp(3
 
 /* transit line */
 .line{position:relative;display:grid;gap:0;padding-block:28px 8px}
-.line::before{content:"";position:absolute;left:23px;top:44px;bottom:44px;width:6px;border-radius:3px;background:linear-gradient(var(--r-washington),var(--r-master),var(--r-curitiba),var(--r-fe),var(--r-esplanada),var(--r-itamaraty),var(--r-picanha))}
+.line::before{content:"";position:absolute;left:23px;top:44px;bottom:44px;width:6px;border-radius:3px;background:linear-gradient(var(--r-washington),var(--r-master),var(--r-curitiba),var(--r-fe),var(--r-esplanada),var(--r-itamaraty),var(--r-picanha),var(--r-ibge))}
 .stop{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:18px;padding-block:14px;text-decoration:none;color:var(--ink)}
 .stop .pin{width:52px;height:52px;border-radius:50%;background:var(--paper);border:6px solid var(--c);position:relative;z-index:1;margin-top:6px;transition:transform .2s}
 .stop:hover .pin,.stop:focus-visible .pin{transform:scale(1.12)}
@@ -64,7 +64,7 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
 @media (prefers-reduced-motion:reduce){.stop .pin{transition:none}}
 </style>
 </head><body>
-<style>/* barra comum das Rotas */.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><nav class="rotas-bar" aria-label="Rotas"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/">Rotas</a><a href="https://fcarvalhodev.github.io/rota-washington/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/">Fé</a><a href="https://fcarvalhodev.github.io/rota-esplanada/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/">Picanha</a></div></nav>
+<style>/* barra comum das Rotas */.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><nav class="rotas-bar" aria-label="Rotas"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/">Rotas</a><a href="https://fcarvalhodev.github.io/rota-washington/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/">Fé</a><a href="https://fcarvalhodev.github.io/rota-esplanada/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/">IBGE</a></div></nav>
 
 
 <header class="wrap">
@@ -116,6 +116,12 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
       <span class="body"><span class="code">Pasto → frigorífico → porto → açougue</span><strong>Picanha</strong>
         <p>Por que a picanha não ficou barata, explicado de um jeito simples: menos boi, muita carne indo para fora, dólar e custos. Com os números completos para quem quiser.</p>
         <span class="meta"><span>1 página</span><span>2020–2026</span></span><span class="go">Abrir rota →</span></span>
+    </a>
+    <a class="stop" style="--c:var(--r-ibge)" href="https://fcarvalhodev.github.io/rota-do-ibge/">
+      <span class="pin" aria-hidden="true"></span>
+      <span class="body"><span class="code">Casa → entrevista → PNAD → taxa</span><strong>IBGE</strong>
+        <p>O desemprego caiu mesmo? Como o IBGE conta, explicado de um jeito simples, e o que é falso nas acusações: Bolsa Família, bico de uma hora e a "mudança na conta".</p>
+        <span class="meta"><span>1 página</span><span>2012–2026</span></span><span class="go">Abrir rota →</span></span>
     </a>
     <div class="stop next" aria-label="Próxima rota em preparação">
       <span class="pin" aria-hidden="true"></span>
