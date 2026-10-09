@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rotas</title>
+<meta name="description" content="Dossiês sobre a eleição de 2026, cada um seguindo uma rota: Washington e Master. Todos com fontes e o mesmo padrão de etiquetas de comprovação.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a transit map of the series. One line, one station per dossier, each in the dossier's own colour; below, the shared evidence standard. */
+:root{
+  --bg:#eef0f1; --paper:#f9fafa; --ink:#18202a; --muted:#5a6470; --line:#cfd5db;
+  --accent:#18202a;
+  --r-washington:#0e7c74; --r-master:#8a6512;
+  --doc:#18202a; --alleg:#a3501a; --alleg-soft:#f8e6d7; --open:#5b4bb0; --open-soft:#e7e3f6;
+  --display:"Archivo","Arial Narrow",Impact,sans-serif;
+  --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
+  --r-washington:#4cc3b6; --r-master:#e0b552;
+  --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
+  --r-washington:#4cc3b6; --r-master:#e0b552;
+  --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px}
+header{padding-block:44px 10px;display:grid;gap:16px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(84px,22vw,190px);line-height:.82;margin:0;text-transform:uppercase}
+.lede{font-size:19px;max-width:60ch;margin:0}
+h2{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:clamp(30px,6vw,44px);line-height:1;margin:0;text-transform:uppercase}
+
+/* transit line */
+.line{position:relative;display:grid;gap:0;padding-block:28px 8px}
+.line::before{content:"";position:absolute;left:23px;top:44px;bottom:44px;width:6px;border-radius:3px;background:linear-gradient(var(--r-washington),var(--r-master))}
+.stop{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:18px;padding-block:14px;text-decoration:none;color:var(--ink)}
+.stop .pin{width:52px;height:52px;border-radius:50%;background:var(--paper);border:6px solid var(--c);position:relative;z-index:1;margin-top:6px;transition:transform .2s}
+.stop:hover .pin,.stop:focus-visible .pin{transform:scale(1.12)}
+.stop:focus-visible{outline:3px solid var(--c);outline-offset:4px;border-radius:4px}
+.stop .body{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:4px;padding:16px 18px;display:grid;gap:6px}
+.stop .code{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);font-weight:500}
+.stop strong{font-family:var(--display);font-stretch:66%;font-weight:900;font-size:clamp(40px,9vw,60px);line-height:.9;text-transform:uppercase}
+.stop p{margin:0;color:var(--muted);max-width:60ch}
+.stop .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 16px}
+.stop .go{font-family:var(--mono);font-size:13px;color:var(--c)}
+.stop.next .pin{border-style:dashed;border-color:var(--line)}
+.stop.next .body{border-left-color:var(--line);border-style:dashed}
+.stop.next strong{color:var(--muted)}
+
+/* shared standard */
+.std{padding-block:40px 8px;display:grid;gap:16px}
+.tags{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.tag{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:14px 16px;display:grid;gap:8px;align-content:start}
+.tag p{margin:0;font-size:15px}
+.ev{justify-self:start;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px;font-weight:500}
+.ev.doc{background:var(--doc);color:var(--paper)}
+.ev.open{background:var(--open-soft);color:var(--open);border:1px dashed var(--open)}
+.ev.alleg{background:var(--alleg-soft);color:var(--alleg);border:1px solid var(--alleg)}
+.rules{margin:0;padding-left:20px;display:grid;gap:6px;max-width:66ch}
+footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){.stop .pin{transition:none}}
+</style>
+</head><body>
+
+<header class="wrap">
+  <div class="kicker">Dossiês · Eleição presidencial 2026</div>
+  <h1>Rotas</h1>
+  <p class="lede">Cada rota segue um caminho do noticiário até o fim: quem está envolvido, o que está comprovado e o que só circula. Todas usam as mesmas regras de prova.</p>
+</header>
+
+<main class="wrap">
+  <nav class="line" aria-label="Rotas publicadas">
+    <a class="stop" style="--c:var(--r-washington)" href="https://fcarvalhodev.github.io/rota-washington/">
+      <span class="pin" aria-hidden="true"></span>
+      <span class="body"><span class="code">BSB → DCA</span><strong>Washington</strong>
+        <p>Como Flávio e Eduardo Bolsonaro negociam com Trump, Rubio e Vance, o que o governo americano exigiu do Brasil e o que Washington planeja para a América Latina.</p>
+        <span class="meta"><span>6 páginas</span><span>2025–2026</span></span><span class="go">Abrir rota →</span></span>
+    </a>
+    <a class="stop" style="--c:var(--r-master)" href="https://fcarvalhodev.github.io/rota-master/">
+      <span class="pin" aria-hidden="true"></span>
+      <span class="body"><span class="code">CNF → GRU → BSB ✕ MLA</span><strong>Master</strong>
+        <p>O caso Vorcaro e o Banco Master: quem aparece no Supremo, no governo e no Congresso, e por que o caso Master, a fraude do INSS e os inquéritos de Lulinha são três coisas diferentes.</p>
+        <span class="meta"><span>3 páginas</span><span>2019–2026</span></span><span class="go">Abrir rota →</span></span>
+    </a>
+    <div class="stop next" aria-label="Próxima rota em preparação">
+      <span class="pin" aria-hidden="true"></span>
+      <span class="body"><span class="code">Em preparação</span><strong>Próxima rota</strong><p>Novos dossiês entram nesta linha com o mesmo padrão.</p></span>
+    </div>
+  </nav>
+
+  <section class="std" aria-labelledby="h-std">
+    <h2 id="h-std">O mesmo padrão em todas</h2>
+    <div class="tags">
+      <div class="tag"><span class="ev doc">Documentado</span><p>Está em decisão judicial, documento oficial, registro público ou declaração do próprio envolvido.</p></div>
+      <div class="tag"><span class="ev open">Em aberto</span><p>Há investigação em curso, sem conclusão. Investigação não é condenação.</p></div>
+      <div class="tag"><span class="ev alleg">Alegação</span><p>Relato de fonte única, mensagem ou acusação que ainda não tem prova.</p></div>
+    </div>
+    <ul class="rules">
+      <li>Todo fato traz o link da reportagem ou do documento de onde saiu.</li>
+      <li>Quando o citado se manifestou, a versão dele aparece junto.</li>
+      <li>Os dois lados entram com o mesmo critério, inclusive quando isso pesa contra um deles.</li>
+    </ul>
+  </section>
+
+  <footer><p>Atualizado em 9 de outubro de 2026. Segundo turno: 25 de outubro de 2026.</p></footer>
+</main>
+</body></html>
