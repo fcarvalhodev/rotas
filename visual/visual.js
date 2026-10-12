@@ -46,6 +46,11 @@ R.verdicts=c=>`${head(c)}<div class="vds">${c.items.map((v,i)=>`<div class="vd" 
 
 R.chips=c=>`${head(c)}<div class="chips">${c.items.map((x,i)=>`<div class="chip" style="--c:${x[3]||'var(--accent)'};transition-delay:${i*130}ms"><span class="y">${esc(x[0])}</span><div><b>${x[1]}</b>${x[2]?`<small>${x[2]}</small>`:''}</div></div>`).join('')}</div>${txt(c)}${foot(c)}`;
 
+R.govs=c=>{const dm=c.dmax||100,jm=c.jmax||10;return `${head(c)}<div class="govs">${c.items.map((g,gi)=>{const d=g.debt;return `<div class="gv" style="transition-delay:${gi*260}ms"><h4>${esc(g.name)}</h4><span class="yrs">${esc(g.years)}</span>
+ <div class="cols" role="img" aria-label="${esc(g.name+': dívida de '+fmt(d[0][1],1)+'% para '+fmt(d[d.length-1][1],1)+'% do PIB')}">${d.map((x,i)=>`<div class="col${i===d.length-1?' end':''}${x[2]?' pk':''}" data-tip="${esc(x[0]+': '+fmt(x[1],1)+'% do PIB')}"><b>${fmt(x[1],1)}%</b><i data-h="${x[1]/dm*72}" style="transition-delay:${gi*260+300+i*220}ms"></i><small>${esc(x[0])}</small></div>`).join('')}</div>
+ <span class="dl ${g.delta>0?'up':'dn'}">${g.delta>0?'▲ +':'▼ '}${fmt(g.delta,1)} pontos</span>
+ <div class="jr"><span class="cap">Juros, % do PIB no ano</span>${g.juros.map((j,i)=>`<div class="r" data-tip="${esc(j[0]+': juros de '+fmt(j[1],2)+'% do PIB')}"><span>${esc(j[0])}</span><span class="t"><span class="f" data-w="${j[1]/jm*100}" style="transition-delay:${gi*260+700+i*150}ms"></span></span><b>${fmt(j[1],1)}%</b></div>`).join('')}</div>
+ ${g.note?`<p>${g.note}</p>`:''}</div>`}).join('')}</div>${txt(c)}${foot(c)}`};
 R.text=c=>`${c.emo?`<span class="emo" aria-hidden="true">${c.emo}</span>`:''}${head(c)}${txt(c)}${foot(c)}`;
 
 // build
@@ -60,7 +65,8 @@ function countUp(el){const v=+el.dataset.count,dec=+el.dataset.dec||0,pre=el.dat
 function play(card){
  card.classList.add('in');
  card.querySelectorAll('[data-count]').forEach(countUp);
- card.querySelectorAll('.bar .f').forEach(f=>f.style.width=f.dataset.w+'%');
+ card.querySelectorAll('.bar .f,.gv .jr .f').forEach(f=>f.style.width=f.dataset.w+'%');
+ card.querySelectorAll('.gv .col i').forEach(i=>i.style.height=i.dataset.h+'%');
  card.querySelectorAll('.waf i[data-c]').forEach(i=>i.style.background=i.dataset.c);
  card.querySelectorAll('.lc .ln').forEach(p=>p.style.strokeDashoffset=0);
  card.querySelectorAll('.lc .ar,.lc .pt,.lc .vl').forEach(p=>p.style.opacity=p.classList.contains('ar')?'':1);
@@ -72,7 +78,7 @@ else{
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);const i=cards.indexOf(e.target);setTimeout(()=>play(e.target),Math.min(i,8)*110)}}),{threshold:.15});
  cards.forEach(c=>io.observe(c));
 }
-document.getElementById('rvagain').addEventListener('click',()=>{cards.forEach(c=>{c.classList.remove('in');c.querySelectorAll('.bar .f').forEach(f=>f.style.width=0);c.querySelectorAll('.waf i[data-c]').forEach(i=>i.style.background='');c.querySelectorAll('.lc .ln').forEach(p=>p.style.strokeDashoffset=1);c.querySelectorAll('.lc .ar,.lc .pt,.lc .vl').forEach(p=>p.style.opacity=0);c.querySelectorAll('.gauge .val').forEach(p=>p.style.strokeDashoffset=p.style.strokeDasharray)});scrollTo({top:0,behavior:reduce?'auto':'smooth'});setTimeout(()=>cards.forEach((c,i)=>{const r=c.getBoundingClientRect();if(r.top<innerHeight)setTimeout(()=>play(c),i*110);else{const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io2.disconnect();play(c)}}),{threshold:.15});io2.observe(c)}}),400)});
+document.getElementById('rvagain').addEventListener('click',()=>{cards.forEach(c=>{c.classList.remove('in');c.querySelectorAll('.bar .f,.gv .jr .f').forEach(f=>f.style.width=0);c.querySelectorAll('.gv .col i').forEach(i=>i.style.height=0);c.querySelectorAll('.waf i[data-c]').forEach(i=>i.style.background='');c.querySelectorAll('.lc .ln').forEach(p=>p.style.strokeDashoffset=1);c.querySelectorAll('.lc .ar,.lc .pt,.lc .vl').forEach(p=>p.style.opacity=0);c.querySelectorAll('.gauge .val').forEach(p=>p.style.strokeDashoffset=p.style.strokeDasharray)});scrollTo({top:0,behavior:reduce?'auto':'smooth'});setTimeout(()=>cards.forEach((c,i)=>{const r=c.getBoundingClientRect();if(r.top<innerHeight)setTimeout(()=>play(c),i*110);else{const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io2.disconnect();play(c)}}),{threshold:.15});io2.observe(c)}}),400)});
 // tooltip
 const tip=document.createElement('div');tip.className='tip';document.body.appendChild(tip);
 root.addEventListener('pointerover',e=>{const t=e.target.closest('[data-tip]');if(!t)return;tip.textContent=t.dataset.tip;tip.classList.add('on')});
