@@ -227,18 +227,25 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-off
 .ico{width:1em;height:1em;display:block;flex:none}
 .flow .st .emo .ico{width:30px;height:30px;color:var(--ink)}
 .flow .st.hot .emo .ico{color:var(--paper)}
-.scl .pi{width:32px;height:32px;color:var(--ink)}.scl .pi .ico{width:32px;height:32px}
+.scl .pi{width:24px;height:24px;color:var(--ink)}.scl .pi .ico{width:24px;height:24px}
 .pile i{background:none;box-shadow:none;width:24px;height:24px}
 .pile i .ico{width:24px;height:24px;stroke-width:2.2}
 .pile i b{color:var(--ink)}
-.iso{display:grid;gap:12px}
-.iso .row{display:grid;gap:4px}
-.iso .rt{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 8px;font-family:var(--ui);font-size:14px;line-height:1.2}
-.iso .rt span{font-family:var(--mono);font-weight:600;font-size:13px}
-@media (max-width:600px){.iso .icons{font-size:19px!important}.isog{font-size:34px!important}}
-.iso .icons{display:flex;flex-wrap:wrap;gap:2px}
+.iso{display:grid;gap:10px}
+.iso .row{display:grid;grid-template-columns:minmax(6em,11em) minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.iso .nm{font-family:var(--ui);font-weight:700;font-size:14px;line-height:1.2}
+.iso .vl{font-family:var(--mono);font-weight:600;font-size:13px;white-space:nowrap;text-align:right}
+.iso .icons{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+.iso .pt{display:block;overflow:hidden;height:1em;flex:none}
+.iso .pt .ico{width:1em;height:1em}
 .iso .ico.off{color:var(--soft)}
-.iso small{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.iso .ih{font-family:var(--display);font-stretch:66%;font-weight:800;font-size:20px;text-transform:uppercase;border-top:1px solid var(--line);padding-top:8px;margin-top:2px}
+.iso .ih:first-child{border-top:0;padding-top:0;margin-top:0}
+.iso.stk2 .row,.s3 .iso .row,.s4 .iso .row{grid-template-columns:minmax(0,1fr) auto}
+.iso.stk2 .row .icons,.s3 .iso .row .icons,.s4 .iso .row .icons{grid-column:1/-1;grid-row:2}
+@media (max-width:899px){.iso .row{grid-template-columns:minmax(0,1fr) auto}.iso .row .icons{grid-column:1/-1;grid-row:2}}
+.cd .key{flex-wrap:wrap;gap:4px 16px}
+.cd .key span{display:inline-flex;align-items:center;gap:5px}
 .cd.in .iso .ico,.cd.in .isog .ico{animation:pop .4s backwards}
 @keyframes pop{from{transform:scale(0)}}
 .isog{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
@@ -266,3 +273,4 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-off
   .iso .ico,.isog .ico,.pile i,.gauge .ndl,.scl .beam,.cd,.waf i,.bar .f,.flow .st,.vd,.chip,.gauge .val{transition:none!important;animation:none!important}
 }
 .s12 .vds{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));column-gap:20px}
+@media (max-width:600px){.iso .icons{font-size:20px!important}.isog{font-size:34px!important}}
