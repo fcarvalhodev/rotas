@@ -11,7 +11,7 @@ const head=c=>`${c.label?`<span class="lbl">${esc(c.label)}</span>`:''}${c.title
 const txt=c=>c.text?`<p>${c.text}</p>`:'';
 const R={};
 
-R.hero=c=>`<span class="kick">${esc(D.kicker||'')}</span><h1>${esc(D.title)}</h1><p class="ans">${D.answer}</p>
+R.hero=c=>`<span class="kick">${esc(D.kicker||'')}</span><h1 aria-label="${esc(D.title)}">${D.title.split(' ').map(w=>`<span class="w" aria-hidden="true">${[...w].map(ch=>`<span class="ch">${esc(ch)}</span>`).join('')}</span>`).join(' ')}</h1><p class="ans">${D.answer}</p>
  <div class="go"><a href="${D.full||'index.html'}">Ler a versão completa</a>${D.easy?`<a class="ghost" href="${D.easy}">Versão fácil</a>`:''}</div>`;
 
 R.big=c=>`${head(c)}<div><span class="n" data-count="${c.value}" data-dec="${c.dec||0}" data-pre="${esc(c.pre||'')}" data-suf="${esc(c.suf||'')}">${esc(c.pre||'')}0${esc(c.suf||'')}</span></div>${c.unit?`<span class="u">${c.unit}</span>`:''}${c.dots?dots(c.dots):''}${txt(c)}${foot(c)}`;
@@ -35,7 +35,7 @@ R.line=c=>{ // points [[x,y,label]], eras [[x0,x1,name]], ymax
  const pts=c.points.map((p,i)=>`<g data-tip="${esc(p[2]+': '+fmt(p[1],1)+(c.suf||''))}"><circle class="pt${p[3]?' pk':''}" cx="${X(p[0])}" cy="${Y(p[1])}" r="${p[3]?6:4.5}" style="opacity:0;transition:opacity .3s ${300+i*140}ms"/>${p[4]?"":`<text class="vl" x="${X(p[0])}" y="${Y(p[1])-11}" text-anchor="middle" style="opacity:0;transition:opacity .3s ${300+i*140}ms">${fmt(p[1],c.dec===undefined?1:c.dec)}${c.suf||''}</text>`}</g>`).join('');
  return `${head(c)}<div class="lc"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(c.alt||c.title||'')}">${eras}<line class="ax" x1="${pl}" x2="${W-pr}" y1="${H-pb}" y2="${H-pb}"/><path class="ar" d="${area}" style="opacity:0;transition:opacity .8s 1.2s"/><path class="ln" d="${d}" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1) .2s"/>${pts}</svg></div>${txt(c)}${foot(c)}`};
 
-R.gauge=c=>{const r=80,len=Math.PI*r,frac=c.value/c.max;return `${head(c)}<div class="gauge"><svg viewBox="0 0 200 134" role="img" aria-label="${esc(c.alt||'')}"><path class="trk" d="M20 105 A80 80 0 0 1 180 105"/><path class="val" d="M20 105 A80 80 0 0 1 180 105" style="stroke-dasharray:${len};stroke-dashoffset:${len}" data-off="${len*(1-frac)}"/><text class="gt" x="100" y="98" data-count="${c.value}" data-dec="${c.dec||0}" data-suf="${esc(c.suf||'')}">0</text><text class="gs" x="100" y="130">${esc(c.sub||'')}</text></svg></div>${txt(c)}${foot(c)}`};
+R.gauge=c=>{const r=80,len=Math.PI*r,frac=c.value/c.max;return `${head(c)}<div class="gauge"><svg viewBox="0 0 200 156" role="img" aria-label="${esc(c.alt||'')}"><path class="trk" d="M20 105 A80 80 0 0 1 180 105"/><path class="val" d="M20 105 A80 80 0 0 1 180 105" style="stroke-dasharray:${len};stroke-dashoffset:${len}" data-off="${len*(1-frac)}"/><g class="ndl" data-a="${-90+Math.min(frac,1)*180}"><line x1="100" y1="105" x2="100" y2="48"/><circle cx="100" cy="105" r="7"/></g><text class="gt" x="100" y="138" data-count="${c.value}" data-dec="${c.dec||0}" data-suf="${esc(c.suf||'')}">0</text><text class="gs" x="100" y="154">${esc(c.sub||'')}</text></svg></div>${txt(c)}${foot(c)}`};
 
 R.flow=c=>`${head(c)}<div class="flow">${c.steps.map((s,i)=>`<div class="st${s.hot?' hot':''}" style="transition-delay:${i*220}ms"><span class="emo" aria-hidden="true">${s.emo}</span><b>${esc(s.name)}</b>${s.sub?`<small>${esc(s.sub)}</small>`:''}</div>`).join('')}</div>${txt(c)}${foot(c)}`;
 
@@ -53,6 +53,9 @@ R.govs=c=>{const dm=c.dmax||100,jm=c.jmax||10;return `${head(c)}<div class="govs
  ${g.note?`<p>${g.note}</p>`:''}</div>`}).join('')}</div>${txt(c)}${foot(c)}`};
 R.contrib=c=>{const m=c.max||Math.max(...c.groups.flatMap(g=>g.items.map(i=>Math.abs(i[1]))));return `${head(c)}<div class="ctb">${c.groups.map((g,gi)=>`<div class="g"><h4>${esc(g.title)}</h4><span class="se">de ${fmt(g.start,1)}% para ${fmt(g.end,1)}% do PIB</span>${g.items.map((x,i)=>{const w=Math.abs(x[1])/m*100,dl=`transition-delay:${gi*300+i*160}ms`;return `<div class="r" data-tip="${esc(x[0]+': '+(x[1]>0?'+':'')+fmt(x[1],1)+' ponto(s)')}"><span class="nm">${esc(x[0])}</span><span class="neg">${x[1]<0?`<i style="width:${w}%;${dl}"></i>`:''}</span><span class="pos">${x[1]>0?`<i style="width:${w}%;${dl}"></i>`:''}</span><b>${x[1]>0?'+':''}${fmt(x[1],1)}</b></div>`}).join('')}<div class="tot">Resultado<span>${(g.total??g.end-g.start)>0?"+":""}${fmt(g.total??g.end-g.start,1)} pontos</span></div></div>`).join('')}</div>${c.legend?leg(c.legend):''}${txt(c)}${foot(c)}`};
 R.stack=c=>{const t=c.items.reduce((a,x)=>a+x[1],0);return `${head(c)}<div class="stk" role="img" aria-label="${esc(c.alt||'')}">${c.items.map((x,i)=>`<i data-b="${x[1]/t*100}" data-tip="${esc(x[0]+': '+x[2])}" style="background:${x[3]};transition-delay:${200+i*250}ms">${x[1]/t>.12?esc(x[2]):''}</i>`).join('')}</div><div class="stkl">${c.items.map(x=>`<div><i style="background:${x[3]}"></i><b>${esc(x[0])}${x[4]?`<small>${x[4]}</small>`:''}</b><span>${esc(x[2])}</span></div>`).join('')}</div>${txt(c)}${foot(c)}`};
+R.coins=c=>{const u=c.unit;return `${head(c)}<div class="coins">${c.items.map((x,xi)=>{const n=Math.max(1,Math.round(x.v/u));let h='';for(let i=0;i<n;i++)h+=`<i style="--cc:${x.color};transition-delay:${xi*300+i*40}ms"><b>R$</b></i>`;return `<div class="cstack" data-tip="${esc(x.name+': '+x.label)}"><div class="pile">${h}</div><b class="cl" style="color:${x.color}">${esc(x.label)}</b><span>${esc(x.name)}</span></div>`}).join('')}</div><p class="key">Cada moeda = ${esc(c.unitLabel)}</p>${txt(c)}${foot(c)}`};
+R.scale=c=>`${head(c)}<div class="scl"><svg viewBox="0 0 320 150" aria-hidden="true"><polygon class="base" points="160,92 140,140 180,140"/><g class="beam" data-t="${c.tilt||0}"><line x1="30" y1="92" x2="290" y2="92"/><circle cx="160" cy="92" r="6"/><g class="pan l"><line x1="40" y1="92" x2="40" y2="118"/><path d="M8 118 h64 a32 14 0 0 1 -64 0z"/><text x="40" y="112">${c.left.emo}</text></g><g class="pan r"><line x1="280" y1="92" x2="280" y2="118"/><path d="M248 118 h64 a32 14 0 0 1 -64 0z"/><text x="280" y="112">${c.right.emo}</text></g></g></svg>
+ <div class="sides"><div><b>${c.left.title}</b><p>${c.left.text}</p></div><div><b>${c.right.title}</b><p>${c.right.text}</p></div></div></div>${txt(c)}${foot(c)}`;
 R.text=c=>`${c.emo?`<span class="emo" aria-hidden="true">${c.emo}</span>`:''}${head(c)}${txt(c)}${foot(c)}`;
 
 // build
@@ -64,6 +67,8 @@ root.innerHTML=D.cards.map(c=>`<section class="cd k ${c.span||'s4'}${c.rows===2?
 function countUp(el){const v=+el.dataset.count,dec=+el.dataset.dec||0,pre=el.dataset.pre||'',suf=el.dataset.suf||'';
  if(reduce){el.textContent=pre+fmt(v,dec)+suf;return}
  const t0=performance.now(),dur=1300;const step=t=>{const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);el.textContent=pre+fmt(v*e,dec)+suf;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step);}
+const G=!reduce&&window.gsap?window.gsap:null;
+if(G){window.ScrollTrigger&&G.registerPlugin(window.ScrollTrigger);root.classList.add('gs')}
 function play(card){
  card.classList.add('in');
  card.querySelectorAll('[data-count]').forEach(countUp);
@@ -74,14 +79,26 @@ function play(card){
  card.querySelectorAll('.lc .ln').forEach(p=>p.style.strokeDashoffset=0);
  card.querySelectorAll('.lc .ar,.lc .pt,.lc .vl').forEach(p=>p.style.opacity=p.classList.contains('ar')?'':1);
  card.querySelectorAll('.gauge .val').forEach(p=>p.style.strokeDashoffset=p.dataset.off);
+ if(!G){card.querySelectorAll('.ndl').forEach(n=>n.style.transform=`rotate(${n.dataset.a}deg)`);card.querySelectorAll('.beam').forEach(b=>b.style.transform=`rotate(${b.dataset.t}deg)`);return}
+ // GSAP flair
+ G.fromTo(card,{opacity:0,y:46,rotationX:-12,transformPerspective:900},{opacity:1,y:0,rotationX:0,duration:.9,ease:'back.out(1.4)',clearProps:'transform'});
+ const chs=card.querySelectorAll('.hero .ch');if(chs.length)G.fromTo(chs,{yPercent:110,opacity:0,rotation:8},{yPercent:0,opacity:1,rotation:0,duration:.6,ease:'back.out(2)',stagger:.025,delay:.15});
+ card.querySelectorAll('.hero .ans,.hero .go').forEach((e,i)=>G.fromTo(e,{opacity:0,y:16},{opacity:1,y:0,duration:.6,delay:.7+i*.15}));
+ card.querySelectorAll('.waf').forEach((w,wi)=>G.fromTo(w.children,{scale:0},{scale:1,duration:.45,ease:'back.out(3)',delay:wi*.25,stagger:{grid:[10,10],from:'center',amount:.9}}));
+ card.querySelectorAll('.ndl').forEach(n=>G.fromTo(n,{rotation:-90,svgOrigin:'100 105'},{rotation:+n.dataset.a,svgOrigin:'100 105',duration:2.2,ease:'elastic.out(1,.32)',delay:.3}));
+ card.querySelectorAll('.beam').forEach(b=>G.fromTo(b,{rotation:-16,svgOrigin:'160 92'},{rotation:+b.dataset.t,svgOrigin:'160 92',duration:2.6,ease:'elastic.out(1,.25)',delay:.4}));
+ card.querySelectorAll('.pile').forEach((p,pi)=>G.fromTo(p.children,{y:-220,opacity:0},{y:0,opacity:1,duration:.7,ease:'bounce.out',delay:.2+pi*.35,stagger:{each:.035,from:'start'}}));
+ card.querySelectorAll('.flow .st').forEach((s,i)=>G.fromTo(s,{scale:.3,opacity:0},{scale:1,opacity:1,duration:.6,ease:'back.out(2.5)',delay:.2+i*.25,clearProps:'transform'}));
+ card.querySelectorAll('.bdg').forEach((b,i)=>G.fromTo(b,{scale:0,rotation:-12},{scale:1,rotation:0,duration:.5,ease:'back.out(3)',delay:.3+i*.14}));
+ card.querySelectorAll('.big .n,.cmp .side b,.cl').forEach(n=>G.fromTo(n,{scale:.6},{scale:1,duration:1,ease:'elastic.out(1,.5)'}));
+ card.querySelectorAll('.lc svg').forEach(svg=>{const p=svg.querySelector('.ln');if(!p)return;const L=p.getTotalLength();const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('r','8');dot.setAttribute('class','flw');svg.appendChild(dot);const o={t:0};G.to(o,{t:1,duration:1.6,delay:.2,ease:'power2.inOut',onUpdate:()=>{const pt=p.getPointAtLength(o.t*L);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y)}})});
 }
 const cards=[...root.querySelectorAll('.cd')];
-if(reduce||!('IntersectionObserver' in window)){cards.forEach(play)}
-else{
- const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);const i=cards.indexOf(e.target);setTimeout(()=>play(e.target),Math.min(i,8)*110)}}),{threshold:.15});
- cards.forEach(c=>io.observe(c));
-}
-document.getElementById('rvagain').addEventListener('click',()=>{cards.forEach(c=>{c.classList.remove('in');c.querySelectorAll('.bar .f,.gv .jr .f').forEach(f=>f.style.width=0);c.querySelectorAll('.gv .col i').forEach(i=>i.style.height=0);c.querySelectorAll('.stk i').forEach(i=>i.style.flexBasis=0);c.querySelectorAll('.waf i[data-c]').forEach(i=>i.style.background='');c.querySelectorAll('.lc .ln').forEach(p=>p.style.strokeDashoffset=1);c.querySelectorAll('.lc .ar,.lc .pt,.lc .vl').forEach(p=>p.style.opacity=0);c.querySelectorAll('.gauge .val').forEach(p=>p.style.strokeDashoffset=p.style.strokeDasharray)});scrollTo({top:0,behavior:reduce?'auto':'smooth'});setTimeout(()=>cards.forEach((c,i)=>{const r=c.getBoundingClientRect();if(r.top<innerHeight)setTimeout(()=>play(c),i*110);else{const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io2.disconnect();play(c)}}),{threshold:.15});io2.observe(c)}}),400)});
+if(reduce){cards.forEach(play)}
+else if(G&&window.ScrollTrigger){cards.forEach((c,i)=>window.ScrollTrigger.create({trigger:c,start:'top 90%',once:true,onEnter:()=>setTimeout(()=>play(c),Math.min(i,6)*90)}))}
+else if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);const i=cards.indexOf(e.target);setTimeout(()=>play(e.target),Math.min(i,8)*110)}}),{threshold:.15});cards.forEach(c=>io.observe(c))}
+else cards.forEach(play);
+document.getElementById('rvagain').addEventListener('click',()=>{try{history.scrollRestoration='manual'}catch(e){}scrollTo(0,0);location.reload()});
 // tooltip
 const tip=document.createElement('div');tip.className='tip';document.body.appendChild(tip);
 root.addEventListener('pointerover',e=>{const t=e.target.closest('[data-tip]');if(!t)return;tip.textContent=t.dataset.tip;tip.classList.add('on')});
