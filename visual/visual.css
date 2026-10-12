@@ -223,6 +223,37 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-off
 .gs .waf i{transform:none;transition:background-color .3s}
 .gs .gauge .ndl,.gs .scl .beam{transition:none;transform:none;transform-origin:0 0}
 
+/* icons and isotype */
+.ico{width:1em;height:1em;display:block;flex:none}
+.flow .st .emo .ico{width:30px;height:30px;color:var(--ink)}
+.flow .st.hot .emo .ico{color:var(--paper)}
+.scl .pi{width:32px;height:32px;color:var(--ink)}.scl .pi .ico{width:32px;height:32px}
+.pile i{background:none;box-shadow:none;width:24px;height:24px}
+.pile i .ico{width:24px;height:24px;stroke-width:2.2}
+.pile i b{color:var(--ink)}
+.iso{display:grid;gap:12px}
+.iso .row{display:grid;gap:4px}
+.iso .rt{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 8px;font-family:var(--ui);font-size:14px;line-height:1.2}
+.iso .rt span{font-family:var(--mono);font-weight:600;font-size:13px}
+@media (max-width:600px){.iso .icons{font-size:19px!important}.isog{font-size:34px!important}}
+.iso .icons{display:flex;flex-wrap:wrap;gap:2px}
+.iso .ico.off{color:var(--soft)}
+.iso small{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.cd.in .iso .ico,.cd.in .isog .ico{animation:pop .4s backwards}
+@keyframes pop{from{transform:scale(0)}}
+.isog{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.isol{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px 12px}
+.isol div{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:6px;align-items:center;font-size:13px}
+.isol .ico{width:20px;height:20px}
+.isol b{font-family:var(--ui);font-weight:700}
+.isol span{font-family:var(--mono);font-size:12px}
+.cd .key{display:flex;align-items:center;justify-content:center;gap:6px}
+.cd .key .ico{width:16px;height:16px}
+.hero .hfl{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero .hfl .f{position:absolute;width:56px;height:56px;color:#fff;opacity:.12}
+.hero>*:not(.hfl){position:relative}
+.gs .cd.in .iso .ico,.gs .cd.in .isog .ico{animation:none}
+
 /* tooltip */
 .tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--paper);font-family:var(--ui);font-size:13px;font-weight:600;padding:6px 9px;border-radius:6px;opacity:0;transition:opacity .12s;max-width:240px}
 .tip.on{opacity:1}
@@ -232,6 +263,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-off
 .rvfoot button{font:inherit;color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;cursor:pointer}
 
 @media (prefers-reduced-motion:reduce){
-  .pile i,.gauge .ndl,.scl .beam,.cd,.waf i,.bar .f,.flow .st,.vd,.chip,.gauge .val{transition:none!important;animation:none!important}
+  .iso .ico,.isog .ico,.pile i,.gauge .ndl,.scl .beam,.cd,.waf i,.bar .f,.flow .st,.vd,.chip,.gauge .val{transition:none!important;animation:none!important}
 }
 .s12 .vds{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));column-gap:20px}
