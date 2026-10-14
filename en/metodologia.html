@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Methodology · Routes</title>
+<meta name="description" content="The Routes' editorial criteria: facts, allegations, sources, comparisons and correction history.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: a transit map of the series. One line, one station per dossier, each in the dossier's own colour; below, the shared evidence standard. */
+:root{
+  --bg:#eef0f1; --paper:#f9fafa; --ink:#18202a; --muted:#5a6470; --line:#cfd5db;
+  --accent:#18202a;
+  --r-washington:#0e7c74; --r-master:#8a6512; --r-curitiba:#2f6b4f; --r-fe:#5b3a8c; --r-esplanada:#a8431e; --r-itamaraty:#9b2c6b; --r-picanha:#4f6b17; --r-ibge:#2c4a7e; --r-velho-chico:#94531a; --r-tesouro:#4b5563; --r-rouanet:#a3283c; --r-ventos:#0b6f94;
+  --doc:#18202a; --alleg:#a3501a; --alleg-soft:#f8e6d7; --open:#5b4bb0; --open-soft:#e7e3f6;
+  --display:"Archivo","Arial Narrow",Impact,sans-serif;
+  --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8;
+  --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8;
+  --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px}
+header{padding-block:44px 10px;display:grid;gap:16px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(84px,22vw,190px);line-height:.82;margin:0;text-transform:uppercase}
+.lede{font-size:19px;max-width:60ch;margin:0}
+h2{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:clamp(30px,6vw,44px);line-height:1;margin:0;text-transform:uppercase}
+
+/* transit line */
+.line{position:relative;display:grid;gap:0;padding-block:28px 8px}
+.line::before{content:"";position:absolute;left:23px;top:44px;bottom:44px;width:6px;border-radius:3px;background:linear-gradient(var(--r-washington),var(--r-master),var(--r-curitiba),var(--r-fe),var(--r-esplanada),var(--r-itamaraty),var(--r-picanha),var(--r-ibge),var(--r-velho-chico),var(--r-tesouro),var(--r-rouanet),var(--r-ventos))}
+.stop{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:18px;padding-block:14px;text-decoration:none;color:var(--ink)}
+.stop .pin{width:52px;height:52px;border-radius:50%;background:var(--paper);border:6px solid var(--c);position:relative;z-index:1;margin-top:6px;transition:transform .2s}
+.stop:hover .pin,.stop:focus-visible .pin{transform:scale(1.12)}
+.stop:focus-visible{outline:3px solid var(--c);outline-offset:4px;border-radius:4px}
+.stop .body{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:4px;padding:16px 18px;display:grid;gap:6px}
+.stop .code{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);font-weight:500}
+.stop strong{font-family:var(--display);font-stretch:66%;font-weight:900;font-size:clamp(40px,9vw,60px);line-height:.9;text-transform:uppercase}
+.stop p{margin:0;color:var(--muted);max-width:60ch}
+.stop .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 16px}
+.stop .go{font-family:var(--mono);font-size:13px;color:var(--c)}
+.stop.next .pin{border-style:dashed;border-color:var(--line)}
+.stop.next .body{border-left-color:var(--line);border-style:dashed}
+.stop.next strong{color:var(--muted)}
+
+/* shared standard */
+.std{padding-block:40px 8px;display:grid;gap:16px}
+.tags{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.tag{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:14px 16px;display:grid;gap:8px;align-content:start}
+.tag p{margin:0;font-size:15px}
+.ev{justify-self:start;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px;font-weight:500}
+.ev.doc{background:var(--doc);color:var(--paper)}
+.ev.open{background:var(--open-soft);color:var(--open);border:1px dashed var(--open)}
+.ev.alleg{background:var(--alleg-soft);color:var(--alleg);border:1px solid var(--alleg)}
+.rules{margin:0;padding-left:20px;display:grid;gap:6px;max-width:66ch}
+footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){.stop .pin{transition:none}}
+</style>
+</head><body>
+<style>/* barra comum das Rotas */.rotas-bar .rb-lang{margin-left:auto;color:var(--accent);font-weight:600}.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><nav class="rotas-bar" aria-label="Routes"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/en/">Routes</a><a href="https://fcarvalhodev.github.io/rota-washington/en/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/en/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/en/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/en/">Faith</a><a href="https://fcarvalhodev.github.io/rota-esplanada/en/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/en/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/en/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/en/">IBGE</a><a href="https://fcarvalhodev.github.io/rota-velho-chico/en/">Velho Chico</a><a href="https://fcarvalhodev.github.io/rota-do-tesouro/en/">Treasury</a><a href="https://fcarvalhodev.github.io/rota-rouanet/en/">Rouanet</a><a href="https://fcarvalhodev.github.io/rota-dos-ventos/en/">Winds</a><a href="https://fcarvalhodev.github.io/rota-do-algoritmo/en/">Algorithm</a><a class="rb-lang" href="../metodologia.html" hreflang="pt-BR" lang="pt-BR">PT</a></div></nav>
+
+
+<main class="wrap">
+<header><div class="kicker">Routes · editorial criteria</div><h1>How we read sources</h1><p>Facts, accusations and interpretations need different kinds of evidence. We use the same standard for different people and political positions.</p></header>
+<section class="std"><h2>What each label means</h2>
+<ul class="rules"><li><b>Documented:</b> there is a record of the event or statement. A document containing an accusation proves the accusation exists, not necessarily that it is true.</li>
+<li><b>True:</b> the sources support the claim for the period and scope stated.</li>
+<li><b>Half true or limited comparison:</b> part of it is supported, but context, comparable measures or scope are missing for the conclusion.</li>
+<li><b>False:</b> the claim contradicts identifiable evidence. Absence of proof, on its own, is not enough.</li>
+<li><b>Not shown or no proof:</b> the sources consulted do not allow confirmation. That does not prove the event never happened.</li>
+<li><b>Open:</b> there is an inquiry or dispute with no conclusion. Investigation, indictment, charges and conviction are distinct stages.</li></ul></section>
+<section class="std"><h2>Comparable numbers</h2><p>We state the period, unit, scope and method. A stock is not a sum of projects; bank transactions are not income; a forecast is not a disbursement; MW measures power and MWh measures energy. Historical series must use the same version and population. A correlation or a difference between governments does not by itself show causation.</p></section>
+<section class="std"><h2>Sources and dates</h2><p>We prefer laws, rulings, statistical databases and original documents. News reports and statements by the parties remain identified as such when no full document is accessible. We do not certify sealed case files based on leaks. The page's general date marks the editorial review; charts and cases keep their own reference dates.</p><p>Classifications of sovereignty, influence or political position are editorial interpretations, with criteria explained on the page. The selection of episodes is not an exhaustive inventory.</p></section>
+<section class="std"><h2>Review of October 10, 2026</h2><ul class="rules">
+<li>Master: corrected Vorcaro's cancelled testimony; distinguished transactions, income and collateral; adjusted the scope of allegations.</li>
+<li>Washington: corrected an electoral percentage and the stage of the inquiry; separated the announcement and the closing of the Serra Verde deal; clarified legal effects and the limits of drafts.</li>
+<li>Itamaraty: added the Brazil–China defense agreement; removed bars that compared different investment bases; revised generalizations about jobs and modalities.</li>
+<li>Picanha: corrected the kilogram calculation and the difference between 38 and 31.9 kg; removed an invalid historical purchasing-power comparison; revised causal verdicts.</li>
+<li>IBGE: chart redone with a current SIDRA extraction, definitions completed, and the 5.1% record distinguished from the recent 5.3% figure.</li>
+<li>Faith: marked the population break in the census chart; identified historical accounts from secondary sources.</li>
+<li>Esplanada: separated the phases of Desenrola and PAA; recorded rule changes and precedents.</li>
+<li>Treasury, Rouanet, Winds and Velho Chico: corrected concepts, limits of inference, timelines and periods; added primary sources.</li>
+<li>Curitiba: legal panel identified as a 2022 snapshot, distinguishing annulment from merits.</li>
+</ul><p>Points without sufficient confirmation remain explicitly limited. Lola's game is a personalized story and received no factual change in this review.</p></section>
+<section class="std"><h2>News update on October 12, 2026</h2><p>Checked on Tokyo time; news identified by the date it happened or was published in Brazil. All 13 Routes repositories were synchronized, excluding the personalized game.</p><p>Washington received the Meta follow-up; Master, the Federal Police note; Picanha, the September IPCA series; Velho Chico, state information on the CAC. New news and incorporated background are distinguished. Not finding a verifiable update in the screening does not certify that there is no news.</p></section>
+<footer><p>Reviewed on October 12, 2026 (Tokyo). <a href="./">Back to the Routes →</a></p></footer>
+</main>
+</body></html>
