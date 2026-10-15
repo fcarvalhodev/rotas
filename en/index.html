@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Routes</title>
-<meta name="description" content="Dossiers on Brazil's 2026 election, each following a route: Washington, Master, Curitiba, Faith, Esplanada, Itamaraty, Picanha, IBGE, Velho Chico, Treasury, Rouanet, Winds and Algorithm. All with sources and the same evidence labels.">
+<meta name="description" content="Dossiers on Brazil's 2026 election, each following a route: Washington, Master, Curitiba, Faith, Esplanada, Itamaraty, Picanha, IBGE, Velho Chico, Treasury, Rouanet, Winds, Algorithm and Pump. All with sources and the same evidence labels.">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -10,7 +10,7 @@
 :root{
   --bg:#eef0f1; --paper:#f9fafa; --ink:#18202a; --muted:#5a6470; --line:#cfd5db;
   --accent:#18202a;
-  --r-washington:#0e7c74; --r-master:#8a6512; --r-curitiba:#2f6b4f; --r-fe:#5b3a8c; --r-esplanada:#a8431e; --r-itamaraty:#9b2c6b; --r-picanha:#4f6b17; --r-ibge:#2c4a7e; --r-velho-chico:#94531a; --r-tesouro:#4b5563; --r-rouanet:#a3283c; --r-ventos:#0b6f94; --r-algoritmo:#4338ca;
+  --r-washington:#0e7c74; --r-master:#8a6512; --r-curitiba:#2f6b4f; --r-fe:#5b3a8c; --r-esplanada:#a8431e; --r-itamaraty:#9b2c6b; --r-picanha:#4f6b17; --r-ibge:#2c4a7e; --r-velho-chico:#94531a; --r-tesouro:#4b5563; --r-rouanet:#a3283c; --r-ventos:#0b6f94; --r-algoritmo:#4338ca; --r-posto:#9a5b00;
   --doc:#18202a; --alleg:#a3501a; --alleg-soft:#f8e6d7; --open:#5b4bb0; --open-soft:#e7e3f6;
   --display:"Archivo","Arial Narrow",Impact,sans-serif;
   --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -18,11 +18,11 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
-  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8; --r-algoritmo:#a5b4fc;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8; --r-algoritmo:#a5b4fc; --r-posto:#f0b75a;
   --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
-  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8; --r-algoritmo:#a5b4fc;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8; --r-algoritmo:#a5b4fc; --r-posto:#f0b75a;
   --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55}
@@ -35,7 +35,7 @@ h2{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:clamp(3
 
 /* transit line */
 .line{position:relative;display:grid;gap:0;padding-block:28px 8px}
-.line::before{content:"";position:absolute;left:23px;top:44px;bottom:44px;width:6px;border-radius:3px;background:linear-gradient(var(--r-washington),var(--r-master),var(--r-curitiba),var(--r-fe),var(--r-esplanada),var(--r-itamaraty),var(--r-picanha),var(--r-ibge),var(--r-velho-chico),var(--r-tesouro),var(--r-rouanet),var(--r-ventos),var(--r-algoritmo))}
+.line::before{content:"";position:absolute;left:23px;top:44px;bottom:44px;width:6px;border-radius:3px;background:linear-gradient(var(--r-washington),var(--r-master),var(--r-curitiba),var(--r-fe),var(--r-esplanada),var(--r-itamaraty),var(--r-picanha),var(--r-ibge),var(--r-velho-chico),var(--r-tesouro),var(--r-rouanet),var(--r-ventos),var(--r-algoritmo),var(--r-posto))}
 .stop{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:18px;padding-block:14px;text-decoration:none;color:var(--ink)}
 .stop .pin{width:52px;height:52px;border-radius:50%;background:var(--paper);border:6px solid var(--c);position:relative;z-index:1;margin-top:6px;transition:transform .2s}
 .stop:hover .pin,.stop:focus-visible .pin{transform:scale(1.12)}
@@ -64,7 +64,7 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
 @media (prefers-reduced-motion:reduce){.stop .pin{transition:none}}
 </style>
 </head><body>
-<style>/* barra comum das Rotas */.rotas-bar .rb-lang{margin-left:auto;color:var(--accent);font-weight:600}.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><nav class="rotas-bar" aria-label="Routes"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/en/">Routes</a><a href="https://fcarvalhodev.github.io/rota-washington/en/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/en/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/en/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/en/">Faith</a><a href="https://fcarvalhodev.github.io/rota-esplanada/en/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/en/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/en/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/en/">IBGE</a><a href="https://fcarvalhodev.github.io/rota-velho-chico/en/">Velho Chico</a><a href="https://fcarvalhodev.github.io/rota-do-tesouro/en/">Treasury</a><a href="https://fcarvalhodev.github.io/rota-rouanet/en/">Rouanet</a><a href="https://fcarvalhodev.github.io/rota-dos-ventos/en/">Winds</a><a href="https://fcarvalhodev.github.io/rota-do-algoritmo/en/">Algorithm</a><a class="rb-lang" href="../" hreflang="pt-BR" lang="pt-BR">PT</a></div></nav>
+<style>/* barra comum das Rotas */.rotas-bar .rb-lang{margin-left:auto;color:var(--accent);font-weight:600}.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><nav class="rotas-bar" aria-label="Routes"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/en/">Routes</a><a href="https://fcarvalhodev.github.io/rota-washington/en/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/en/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/en/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/en/">Faith</a><a href="https://fcarvalhodev.github.io/rota-esplanada/en/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/en/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/en/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/en/">IBGE</a><a href="https://fcarvalhodev.github.io/rota-velho-chico/en/">Velho Chico</a><a href="https://fcarvalhodev.github.io/rota-do-tesouro/en/">Treasury</a><a href="https://fcarvalhodev.github.io/rota-rouanet/en/">Rouanet</a><a href="https://fcarvalhodev.github.io/rota-dos-ventos/en/">Winds</a><a href="https://fcarvalhodev.github.io/rota-do-algoritmo/en/">Algorithm</a><a href="https://fcarvalhodev.github.io/rota-do-posto/en/">Pump</a><a class="rb-lang" href="../" hreflang="pt-BR" lang="pt-BR">PT</a></div></nav>
 
 
 <header class="wrap">
@@ -103,7 +103,9 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
         <p>Is the Northeast's wind being thrown away? The generation cuts, the comparison with Itaipu, planned investments cancelled, causes and Flávio's proposals.</p>
         <span class="meta"><span>1 page</span><span>2023–2026</span></span><span class="go">Open route →</span></span> </a> <a class="stop" style="--c:var(--r-algoritmo)" href="https://fcarvalhodev.github.io/rota-do-algoritmo/en/"> <span class="pin" aria-hidden="true"></span> <span class="body"><span class="code">Post → rule → block → appeal</span><strong>Algorithm</strong>
         <p>Does Meta take down more left-wing accounts? The comparison between the two sides: banned accounts, the 1,121 reports from Lula supporters, Nikolas Ferreira's off-the-charts engagement and the data the TSE asked for.</p>
-        <span class="meta"><span>1 page</span><span>2020–2026</span></span><span class="go">Open route →</span></span>
+        <span class="meta"><span>1 page</span><span>2020–2026</span></span><span class="go">Open route →</span></span> </a> <a class="stop" style="--c:var(--r-posto)" href="https://fcarvalhodev.github.io/rota-do-posto/en/"> <span class="pin" aria-hidden="true"></span> <span class="body"><span class="code">Well → refinery → distributor → pump</span><strong>Pump</strong>
+        <p>Whose fault is expensive gasoline? The price from Dilma to Lula adjusted for inflation, the litres a minimum wage buys, the sale of BR, the ICMS tax in Minas Gerais and the tax cuts in election years.</p>
+        <span class="meta"><span>1 page</span><span>2011–2026</span></span><span class="go">Open route →</span></span>
     </a>
     <div class="stop next" aria-label="Next route in preparation">
       <span class="pin" aria-hidden="true"></span>
