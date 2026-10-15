@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rotas</title>
-<meta name="description" content="Dossiês sobre a eleição de 2026, cada um seguindo uma rota: Washington, Master, Curitiba, Fé, Esplanada, Itamaraty, Picanha, IBGE, Velho Chico, Tesouro, Rouanet, Ventos, Algoritmo e Posto. Todos com fontes e o mesmo padrão de etiquetas de comprovação.">
+<meta name="description" content="Dossiês sobre a eleição de 2026, cada um seguindo uma rota: Washington, Master, Curitiba, Fé, Esplanada, Itamaraty, Picanha, IBGE, Velho Chico, Tesouro, Rouanet, Ventos, Algoritmo, Posto, Queimadas e Games. Todos com fontes e o mesmo padrão de etiquetas de comprovação.">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout: a transit map of the series. One line, one station per dossier, each in the dossier's own colour; below, the shared evidence standard. */
+/* Layout: shelves of dossier cards, Netflix style. Each card in the dossier's own colour; the same dossier can sit on more than one shelf. Below, the news check and the shared evidence standard. */
 :root{
   --bg:#eef0f1; --paper:#f9fafa; --ink:#18202a; --muted:#5a6470; --line:#cfd5db;
   --accent:#18202a;
-  --r-washington:#0e7c74; --r-master:#8a6512; --r-curitiba:#2f6b4f; --r-fe:#5b3a8c; --r-esplanada:#a8431e; --r-itamaraty:#9b2c6b; --r-picanha:#4f6b17; --r-ibge:#2c4a7e; --r-velho-chico:#94531a; --r-tesouro:#4b5563; --r-rouanet:#a3283c; --r-ventos:#0b6f94; --r-algoritmo:#4338ca; --r-posto:#9a5b00;
+  --r-washington:#0e7c74; --r-master:#8a6512; --r-curitiba:#2f6b4f; --r-fe:#5b3a8c; --r-esplanada:#a8431e; --r-itamaraty:#9b2c6b; --r-picanha:#4f6b17; --r-ibge:#2c4a7e; --r-velho-chico:#94531a; --r-tesouro:#4b5563; --r-rouanet:#a3283c; --r-ventos:#0b6f94; --r-algoritmo:#4338ca; --r-posto:#9a5b00; --r-queimadas:#c2410c; --r-games:#6d28d9;
   --doc:#18202a; --alleg:#a3501a; --alleg-soft:#f8e6d7; --open:#5b4bb0; --open-soft:#e7e3f6;
   --display:"Archivo","Arial Narrow",Impact,sans-serif;
   --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -18,37 +18,43 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
-  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8; --r-algoritmo:#a5b4fc; --r-posto:#f0b75a;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8; --r-algoritmo:#a5b4fc; --r-posto:#f0b75a; --r-queimadas:#fb923c; --r-games:#c4b5fd;
   --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#10151b; --paper:#171e26; --ink:#e6eaef; --muted:#9aa5b1; --line:#2a333d; --accent:#e6eaef;
-  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8; --r-algoritmo:#a5b4fc; --r-posto:#f0b75a;
+  --r-washington:#4cc3b6; --r-master:#e0b552; --r-curitiba:#6cc79a; --r-fe:#b79be6; --r-esplanada:#e98a5f; --r-itamaraty:#e58ab8; --r-picanha:#a9c95a; --r-ibge:#8fb0e6; --r-velho-chico:#e8a46a; --r-tesouro:#aab3bf; --r-rouanet:#f08f9c; --r-ventos:#5cc4e8; --r-algoritmo:#a5b4fc; --r-posto:#f0b75a; --r-queimadas:#fb923c; --r-games:#c4b5fd;
   --doc:#e6eaef; --alleg:#f0a066; --alleg-soft:#3a2516; --open:#ab9ff0; --open-soft:#29254a; color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55}
 .wrap{max-width:880px;margin:0 auto;padding-inline:16px}
 header{padding-block:44px 10px;display:grid;gap:16px}
 .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(84px,22vw,190px);line-height:.82;margin:0;text-transform:uppercase}
+h1{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(72px,17vw,140px);line-height:.82;margin:0;text-transform:uppercase}
 .lede{font-size:19px;max-width:60ch;margin:0}
 h2{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:clamp(30px,6vw,44px);line-height:1;margin:0;text-transform:uppercase}
 
-/* transit line */
-.line{position:relative;display:grid;gap:0;padding-block:28px 8px}
-.line::before{content:"";position:absolute;left:23px;top:44px;bottom:44px;width:6px;border-radius:3px;background:linear-gradient(var(--r-washington),var(--r-master),var(--r-curitiba),var(--r-fe),var(--r-esplanada),var(--r-itamaraty),var(--r-picanha),var(--r-ibge),var(--r-velho-chico),var(--r-tesouro),var(--r-rouanet),var(--r-ventos),var(--r-algoritmo),var(--r-posto))}
-.stop{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:18px;padding-block:14px;text-decoration:none;color:var(--ink)}
-.stop .pin{width:52px;height:52px;border-radius:50%;background:var(--paper);border:6px solid var(--c);position:relative;z-index:1;margin-top:6px;transition:transform .2s}
-.stop:hover .pin,.stop:focus-visible .pin{transform:scale(1.12)}
-.stop:focus-visible{outline:3px solid var(--c);outline-offset:4px;border-radius:4px}
-.stop .body{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:4px;padding:16px 18px;display:grid;gap:6px}
-.stop .code{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);font-weight:500}
-.stop strong{font-family:var(--display);font-stretch:66%;font-weight:900;font-size:clamp(40px,9vw,60px);line-height:.9;text-transform:uppercase}
-.stop p{margin:0;color:var(--muted);max-width:60ch}
-.stop .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 16px}
-.stop .go{font-family:var(--mono);font-size:13px;color:var(--c)}
-.stop.next .pin{border-style:dashed;border-color:var(--line)}
-.stop.next .body{border-left-color:var(--line);border-style:dashed}
-.stop.next strong{color:var(--muted)}
+/* shelves: rows of cards that slide sideways */
+.count{margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.shelf{padding-block:22px 4px;display:grid;gap:10px}
+.sh-head{display:flex;align-items:end;justify-content:space-between;gap:12px}
+.shelf h2{font-size:clamp(26px,5vw,36px)}
+.arrows{display:flex;gap:6px}
+.ar{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0 0 3px}
+.ar:hover{border-color:var(--ink)}
+.ar:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.row{display:grid;grid-auto-flow:column;grid-auto-columns:min(78%,260px);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:2px;padding:4px 2px 14px;scrollbar-width:thin;overscroll-behavior-x:contain}
+.card{scroll-snap-align:start;display:grid;grid-template-rows:auto 1fr;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;text-decoration:none;color:var(--ink);min-height:330px;transition:transform .18s,box-shadow .18s}
+.card:hover,.card:focus-visible{transform:translateY(-4px);box-shadow:0 10px 22px rgba(0,0,0,.14)}
+.card:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+.card .band{background:var(--c);color:var(--paper);padding:14px 16px 16px;display:grid;gap:6px;min-height:130px;align-content:space-between}
+.card .code{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.92}
+.card strong{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:48px;line-height:.88;text-transform:uppercase;overflow-wrap:anywhere}
+.card .txt{padding:14px 16px 16px;display:grid;gap:10px;align-content:space-between}
+.card p{margin:0;font-size:15px;line-height:1.5;color:var(--ink);display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.card .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+@media (max-width:640px){.arrows{display:none}}
+.card strong.long{font-size:40px}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
 
 /* shared standard */
 .std{padding-block:40px 8px;display:grid;gap:16px}
@@ -61,10 +67,9 @@ h2{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:clamp(3
 .ev.alleg{background:var(--alleg-soft);color:var(--alleg);border:1px solid var(--alleg)}
 .rules{margin:0;padding-left:20px;display:grid;gap:6px;max-width:66ch}
 footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
-@media (prefers-reduced-motion:reduce){.stop .pin{transition:none}}
 </style>
 </head><body>
-<style>/* barra comum das Rotas */.rotas-bar .rb-lang{margin-left:auto;color:var(--accent);font-weight:600}.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><nav class="rotas-bar" aria-label="Rotas"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/">Rotas</a><a href="https://fcarvalhodev.github.io/rota-washington/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/">Fé</a><a href="https://fcarvalhodev.github.io/rota-esplanada/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/">IBGE</a><a href="https://fcarvalhodev.github.io/rota-velho-chico/">Velho Chico</a><a href="https://fcarvalhodev.github.io/rota-do-tesouro/">Tesouro</a><a href="https://fcarvalhodev.github.io/rota-rouanet/">Rouanet</a><a href="https://fcarvalhodev.github.io/rota-dos-ventos/">Ventos</a><a href="https://fcarvalhodev.github.io/rota-do-algoritmo/">Algoritmo</a><a href="https://fcarvalhodev.github.io/rota-do-posto/">Posto</a><a class="rb-lang" href="en/" hreflang="en" lang="en">EN</a></div></nav>
+<style>/* barra comum das Rotas */.rotas-bar .rb-lang{margin-left:auto;color:var(--accent);font-weight:600}.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><nav class="rotas-bar" aria-label="Rotas"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/">Rotas</a><a href="https://fcarvalhodev.github.io/rota-washington/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/">Fé</a><a href="https://fcarvalhodev.github.io/rota-esplanada/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/">IBGE</a><a href="https://fcarvalhodev.github.io/rota-velho-chico/">Velho Chico</a><a href="https://fcarvalhodev.github.io/rota-do-tesouro/">Tesouro</a><a href="https://fcarvalhodev.github.io/rota-rouanet/">Rouanet</a><a href="https://fcarvalhodev.github.io/rota-dos-ventos/">Ventos</a><a href="https://fcarvalhodev.github.io/rota-do-algoritmo/">Algoritmo</a><a href="https://fcarvalhodev.github.io/rota-do-posto/">Posto</a><a href="https://fcarvalhodev.github.io/rota-das-queimadas/">Queimadas</a><a href="https://fcarvalhodev.github.io/rota-dos-games/">Games</a><a class="rb-lang" href="en/" hreflang="en" lang="en">EN</a></div></nav>
 
 
 <header class="wrap">
@@ -74,96 +79,58 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
 </header>
 
 <main class="wrap">
-  <nav class="line" aria-label="Rotas publicadas">
-    <a class="stop" style="--c:var(--r-washington)" href="https://fcarvalhodev.github.io/rota-washington/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">BSB → DCA</span><strong>Washington</strong>
-        <p>Como Flávio e Eduardo Bolsonaro negociam com Trump, Rubio e Vance, o que o governo americano exigiu do Brasil e o que Washington planeja para a América Latina.</p>
-        <span class="meta"><span>6 páginas</span><span>2025–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-master)" href="https://fcarvalhodev.github.io/rota-master/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">CNF → GRU → BSB ✕ MLA</span><strong>Master</strong>
-        <p>O caso Vorcaro e o Banco Master: quem aparece no Supremo, no governo e no Congresso, e por que o caso Master, a fraude do INSS e os inquéritos de Lulinha são três coisas diferentes.</p>
-        <span class="meta"><span>4 páginas</span><span>2019–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-curitiba)" href="https://fcarvalhodev.github.io/rota-curitiba/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">CWB → POA → CWB → BSB</span><strong>Curitiba</strong>
-        <p>Lula e Lulinha na Lava Jato e depois dela: o que acusaram, o que a Justiça decidiu e o que ficou, processo por processo. Inclui o que pesa contra, com o mesmo critério.</p>
-        <span class="meta"><span>3 páginas</span><span>2012–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-fe)" href="https://fcarvalhodev.github.io/rota-da-fe/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">FCO → MDE → DCA → BSB → CNF</span><strong>Fé</strong>
-        <p>Como a religião entra na política brasileira, pelos dois lados, e onde a lei põe o limite: da Teologia da Libertação à bancada evangélica e à Lagoinha.</p>
-        <span class="meta"><span>1 página</span><span>1962–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-esplanada)" href="https://fcarvalhodev.github.io/rota-esplanada/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">1988 → 2003 → 2026</span><strong>Esplanada</strong>
-        <p>Programas e benefícios federais desde a redemocratização: quem criou, quem ampliou e quem só trocou o nome. Bolsa Família, SUS, FIES, Pix, Auxílio Emergencial e mais, com o mesmo critério para todos os governos.</p>
-        <span class="meta"><span>1 página</span><span>1985–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-itamaraty)" href="https://fcarvalhodev.github.io/rota-itamaraty/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">IAD ← BSB → PEK</span><strong>Itamaraty</strong>
-        <p>Como o Brasil negocia com os EUA e com a China desde Lula 1: quanto cada um compra, onde investe e em quem, e quando veio proposta ou ameaça. Do BRICS e da ALCA às tarifas de 2025 e 2026.</p>
-        <span class="meta"><span>1 página</span><span>2003–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-picanha)" href="https://fcarvalhodev.github.io/rota-da-picanha/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">Pasto → frigorífico → porto → açougue</span><strong>Picanha</strong>
-        <p>Por que a picanha não ficou barata, explicado de um jeito simples: menos boi, muita carne indo para fora, dólar e custos. Com os números completos para quem quiser.</p>
-        <span class="meta"><span>1 página</span><span>2020–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-ibge)" href="https://fcarvalhodev.github.io/rota-do-ibge/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">Casa → entrevista → PNAD → taxa</span><strong>IBGE</strong>
-        <p>O desemprego caiu mesmo? Como o IBGE conta, explicado de um jeito simples, e o que é falso nas acusações: Bolsa Família, bico de uma hora e a "mudança na conta".</p>
-        <span class="meta"><span>1 página</span><span>2012–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-velho-chico)" href="https://fcarvalhodev.github.io/rota-velho-chico/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">Rio → bombas → canais → açudes</span><strong>Velho Chico</strong>
-        <p>Quem fez a transposição do São Francisco? O que cada governo fez, quanto investiu e o que ainda falta, explicado de um jeito simples.</p>
-        <span class="meta"><span>1 página</span><span>2007–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-tesouro)" href="https://fcarvalhodev.github.io/rota-do-tesouro/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">Imposto → título → juros → quem recebe</span><strong>Tesouro</strong>
-        <p>A dívida do Brasil é um perigo? Dever em reais ou em dólar, com Argentina e EUA de exemplo, os juros de R$ 1,18 trilhão, quem paga e quem recebe.</p>
-        <span class="meta"><span>1 página</span><span>2013–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-rouanet)" href="https://fcarvalhodev.github.io/rota-rouanet/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">Projeto → patrocínio → imposto → palco</span><strong>Rouanet</strong>
-        <p>Artista fica rico com a Rouanet? O limite de cachê em cada governo, a diferença para os shows pagos por prefeituras e o que é mentira.</p>
-        <span class="meta"><span>1 página</span><span>2016–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-ventos)" href="https://fcarvalhodev.github.io/rota-dos-ventos/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">Vento → usina → linhas → cidades</span><strong>Ventos</strong>
-        <p>O vento do Nordeste está sendo jogado fora? Os cortes de geração, a comparação com Itaipu, investimentos previstos cancelados, causas e as propostas de Flávio.</p>
-        <span class="meta"><span>1 página</span><span>2023–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-algoritmo)" href="https://fcarvalhodev.github.io/rota-do-algoritmo/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">Post → regra → bloqueio → recurso</span><strong>Algoritmo</strong>
-        <p>A Meta derruba mais contas da esquerda? O de-para entre os dois lados: contas banidas, os 1.121 relatos de apoiadores de Lula, o engajamento fora da curva de Nikolas Ferreira e os dados que o TSE pediu.</p>
-        <span class="meta"><span>1 página</span><span>2020–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <a class="stop" style="--c:var(--r-posto)" href="https://fcarvalhodev.github.io/rota-do-posto/">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">Poço → refinaria → distribuidora → posto</span><strong>Posto</strong>
-        <p>A gasolina ficou cara por culpa de quem? O preço de Dilma a Lula corrigido pela inflação, os litros que o salário mínimo compra, a venda da BR, o ICMS de Minas e os cortes de imposto em ano de eleição.</p>
-        <span class="meta"><span>1 página</span><span>2011–2026</span></span><span class="go">Abrir rota →</span></span>
-    </a>
-    <div class="stop next" aria-label="Próxima rota em preparação">
-      <span class="pin" aria-hidden="true"></span>
-      <span class="body"><span class="code">Em preparação</span><strong>Próxima rota</strong><p>Novos dossiês entram nesta linha com o mesmo padrão.</p></span>
+  <p class="count">16 rotas publicadas. Deslize cada fileira para o lado.</p>
+  <section class="shelf" aria-labelledby="sh-novas">
+    <div class="sh-head"><h2 id="sh-novas">Novas</h2><span class="arrows"><button type="button" class="ar" data-d="-1" aria-label="Voltar">‹</button><button type="button" class="ar" data-d="1" aria-label="Avançar">›</button></span></div>
+    <div class="row" role="list">
+      <a class="card" style="--c:var(--r-queimadas)" href="https://fcarvalhodev.github.io/rota-das-queimadas/"><span class="band"><span class="code">Faísca → foco → satélite → multa</span><strong>Queimadas</strong></span><span class="txt"><p>O fogo e o desmatamento aumentaram com quem? Os focos de queimada e a derrubada da Amazônia governo por governo, com os dados do INPE, de Lula 1 até hoje.</p><span class="meta"><span>1 página</span><span>2003–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-games)" href="https://fcarvalhodev.github.io/rota-dos-games/"><span class="band"><span class="code">Ideia → edital → estúdio → loja</span><strong>Games</strong></span><span class="txt"><p>Quem fez mais pelos games no Brasil? Editais, Lei Rouanet, imposto dos consoles, o Marco Legal e o pacote de 2026, governo por governo.</p><span class="meta"><span>1 página</span><span>2003–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-posto)" href="https://fcarvalhodev.github.io/rota-do-posto/"><span class="band"><span class="code">Poço → refinaria → distribuidora → posto</span><strong>Posto</strong></span><span class="txt"><p>A gasolina ficou cara por culpa de quem? O preço de Dilma a Lula corrigido pela inflação, os litros que o salário mínimo compra, a venda da BR, o ICMS de Minas e os cortes de imposto em ano de eleição.</p><span class="meta"><span>1 página</span><span>2011–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-algoritmo)" href="https://fcarvalhodev.github.io/rota-do-algoritmo/"><span class="band"><span class="code">Post → regra → bloqueio → recurso</span><strong>Algoritmo</strong></span><span class="txt"><p>A Meta derruba mais contas da esquerda? O de-para entre os dois lados: contas banidas, os 1.121 relatos de apoiadores de Lula, o engajamento fora da curva de Nikolas Ferreira e os dados que o TSE pediu.</p><span class="meta"><span>1 página</span><span>2020–2026</span></span></span></a>
     </div>
-  </nav>
+  </section>
+  <section class="shelf" aria-labelledby="sh-bolso">
+    <div class="sh-head"><h2 id="sh-bolso">No seu bolso</h2><span class="arrows"><button type="button" class="ar" data-d="-1" aria-label="Voltar">‹</button><button type="button" class="ar" data-d="1" aria-label="Avançar">›</button></span></div>
+    <div class="row" role="list">
+      <a class="card" style="--c:var(--r-posto)" href="https://fcarvalhodev.github.io/rota-do-posto/"><span class="band"><span class="code">Poço → refinaria → distribuidora → posto</span><strong>Posto</strong></span><span class="txt"><p>A gasolina ficou cara por culpa de quem? O preço de Dilma a Lula corrigido pela inflação, os litros que o salário mínimo compra, a venda da BR, o ICMS de Minas e os cortes de imposto em ano de eleição.</p><span class="meta"><span>1 página</span><span>2011–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-picanha)" href="https://fcarvalhodev.github.io/rota-da-picanha/"><span class="band"><span class="code">Pasto → frigorífico → porto → açougue</span><strong>Picanha</strong></span><span class="txt"><p>Por que a picanha não ficou barata, explicado de um jeito simples: menos boi, muita carne indo para fora, dólar e custos. Com os números completos para quem quiser.</p><span class="meta"><span>1 página</span><span>2020–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-ibge)" href="https://fcarvalhodev.github.io/rota-do-ibge/"><span class="band"><span class="code">Casa → entrevista → PNAD → taxa</span><strong>IBGE</strong></span><span class="txt"><p>O desemprego caiu mesmo? Como o IBGE conta, explicado de um jeito simples, e o que é falso nas acusações: Bolsa Família, bico de uma hora e a "mudança na conta".</p><span class="meta"><span>1 página</span><span>2012–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-tesouro)" href="https://fcarvalhodev.github.io/rota-do-tesouro/"><span class="band"><span class="code">Imposto → título → juros → quem recebe</span><strong>Tesouro</strong></span><span class="txt"><p>A dívida do Brasil é um perigo? Dever em reais ou em dólar, com Argentina e EUA de exemplo, os juros de R$ 1,18 trilhão, quem paga e quem recebe.</p><span class="meta"><span>1 página</span><span>2013–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-esplanada)" href="https://fcarvalhodev.github.io/rota-esplanada/"><span class="band"><span class="code">1988 → 2003 → 2026</span><strong>Esplanada</strong></span><span class="txt"><p>Programas e benefícios federais desde a redemocratização: quem criou, quem ampliou e quem só trocou o nome. Bolsa Família, SUS, FIES, Pix, Auxílio Emergencial e mais, com o mesmo critério para todos os governos.</p><span class="meta"><span>1 página</span><span>1985–2026</span></span></span></a>
+    </div>
+  </section>
+  <section class="shelf" aria-labelledby="sh-ambiente">
+    <div class="sh-head"><h2 id="sh-ambiente">Meio ambiente, água e energia</h2><span class="arrows"><button type="button" class="ar" data-d="-1" aria-label="Voltar">‹</button><button type="button" class="ar" data-d="1" aria-label="Avançar">›</button></span></div>
+    <div class="row" role="list">
+      <a class="card" style="--c:var(--r-queimadas)" href="https://fcarvalhodev.github.io/rota-das-queimadas/"><span class="band"><span class="code">Faísca → foco → satélite → multa</span><strong>Queimadas</strong></span><span class="txt"><p>O fogo e o desmatamento aumentaram com quem? Os focos de queimada e a derrubada da Amazônia governo por governo, com os dados do INPE, de Lula 1 até hoje.</p><span class="meta"><span>1 página</span><span>2003–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-velho-chico)" href="https://fcarvalhodev.github.io/rota-velho-chico/"><span class="band"><span class="code">Rio → bombas → canais → açudes</span><strong>Velho Chico</strong></span><span class="txt"><p>Quem fez a transposição do São Francisco? O que cada governo fez, quanto investiu e o que ainda falta, explicado de um jeito simples.</p><span class="meta"><span>1 página</span><span>2007–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-ventos)" href="https://fcarvalhodev.github.io/rota-dos-ventos/"><span class="band"><span class="code">Vento → usina → linhas → cidades</span><strong>Ventos</strong></span><span class="txt"><p>O vento do Nordeste está sendo jogado fora? Os cortes de geração, a comparação com Itaipu, investimentos previstos cancelados, causas e as propostas de Flávio.</p><span class="meta"><span>1 página</span><span>2023–2026</span></span></span></a>
+    </div>
+  </section>
+  <section class="shelf" aria-labelledby="sh-politica">
+    <div class="sh-head"><h2 id="sh-politica">Política, Justiça e redes</h2><span class="arrows"><button type="button" class="ar" data-d="-1" aria-label="Voltar">‹</button><button type="button" class="ar" data-d="1" aria-label="Avançar">›</button></span></div>
+    <div class="row" role="list">
+      <a class="card" style="--c:var(--r-washington)" href="https://fcarvalhodev.github.io/rota-washington/"><span class="band"><span class="code">BSB → DCA</span><strong class="long">Washington</strong></span><span class="txt"><p>Como Flávio e Eduardo Bolsonaro negociam com Trump, Rubio e Vance, o que o governo americano exigiu do Brasil e o que Washington planeja para a América Latina.</p><span class="meta"><span>6 páginas</span><span>2025–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-master)" href="https://fcarvalhodev.github.io/rota-master/"><span class="band"><span class="code">CNF → GRU → BSB ✕ MLA</span><strong>Master</strong></span><span class="txt"><p>O caso Vorcaro e o Banco Master: quem aparece no Supremo, no governo e no Congresso, e por que o caso Master, a fraude do INSS e os inquéritos de Lulinha são três coisas diferentes.</p><span class="meta"><span>4 páginas</span><span>2019–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-curitiba)" href="https://fcarvalhodev.github.io/rota-curitiba/"><span class="band"><span class="code">CWB → POA → CWB → BSB</span><strong>Curitiba</strong></span><span class="txt"><p>Lula e Lulinha na Lava Jato e depois dela: o que acusaram, o que a Justiça decidiu e o que ficou, processo por processo. Inclui o que pesa contra, com o mesmo critério.</p><span class="meta"><span>3 páginas</span><span>2012–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-algoritmo)" href="https://fcarvalhodev.github.io/rota-do-algoritmo/"><span class="band"><span class="code">Post → regra → bloqueio → recurso</span><strong>Algoritmo</strong></span><span class="txt"><p>A Meta derruba mais contas da esquerda? O de-para entre os dois lados: contas banidas, os 1.121 relatos de apoiadores de Lula, o engajamento fora da curva de Nikolas Ferreira e os dados que o TSE pediu.</p><span class="meta"><span>1 página</span><span>2020–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-fe)" href="https://fcarvalhodev.github.io/rota-da-fe/"><span class="band"><span class="code">FCO → MDE → DCA → BSB → CNF</span><strong>Fé</strong></span><span class="txt"><p>Como a religião entra na política brasileira, pelos dois lados, e onde a lei põe o limite: da Teologia da Libertação à bancada evangélica e à Lagoinha.</p><span class="meta"><span>1 página</span><span>1962–2026</span></span></span></a>
+    </div>
+  </section>
+  <section class="shelf" aria-labelledby="sh-mundo">
+    <div class="sh-head"><h2 id="sh-mundo">O Brasil e o mundo</h2><span class="arrows"><button type="button" class="ar" data-d="-1" aria-label="Voltar">‹</button><button type="button" class="ar" data-d="1" aria-label="Avançar">›</button></span></div>
+    <div class="row" role="list">
+      <a class="card" style="--c:var(--r-itamaraty)" href="https://fcarvalhodev.github.io/rota-itamaraty/"><span class="band"><span class="code">IAD ← BSB → PEK</span><strong>Itamaraty</strong></span><span class="txt"><p>Como o Brasil negocia com os EUA e com a China desde Lula 1: quanto cada um compra, onde investe e em quem, e quando veio proposta ou ameaça. Do BRICS e da ALCA às tarifas de 2025 e 2026.</p><span class="meta"><span>1 página</span><span>2003–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-washington)" href="https://fcarvalhodev.github.io/rota-washington/"><span class="band"><span class="code">BSB → DCA</span><strong class="long">Washington</strong></span><span class="txt"><p>Como Flávio e Eduardo Bolsonaro negociam com Trump, Rubio e Vance, o que o governo americano exigiu do Brasil e o que Washington planeja para a América Latina.</p><span class="meta"><span>6 páginas</span><span>2025–2026</span></span></span></a>
+    </div>
+  </section>
+  <section class="shelf" aria-labelledby="sh-cultura">
+    <div class="sh-head"><h2 id="sh-cultura">Cultura e criação</h2><span class="arrows"><button type="button" class="ar" data-d="-1" aria-label="Voltar">‹</button><button type="button" class="ar" data-d="1" aria-label="Avançar">›</button></span></div>
+    <div class="row" role="list">
+      <a class="card" style="--c:var(--r-rouanet)" href="https://fcarvalhodev.github.io/rota-rouanet/"><span class="band"><span class="code">Projeto → patrocínio → imposto → palco</span><strong>Rouanet</strong></span><span class="txt"><p>Artista fica rico com a Rouanet? O limite de cachê em cada governo, a diferença para os shows pagos por prefeituras e o que é mentira.</p><span class="meta"><span>1 página</span><span>2016–2026</span></span></span></a>
+      <a class="card" style="--c:var(--r-games)" href="https://fcarvalhodev.github.io/rota-dos-games/"><span class="band"><span class="code">Ideia → edital → estúdio → loja</span><strong>Games</strong></span><span class="txt"><p>Quem fez mais pelos games no Brasil? Editais, Lei Rouanet, imposto dos consoles, o Marco Legal e o pacote de 2026, governo por governo.</p><span class="meta"><span>1 página</span><span>2003–2026</span></span></span></a>
+    </div>
+  </section>
 
 <section class="std" aria-labelledby="h-noticias-outubro"><h2 id="h-noticias-outubro">Notícias conferidas em 12 de outubro</h2>
 <p>Foco nas Rotas. Consulta no horário de Tóquio; acontecimentos identificados pela data brasileira. A triagem não é um levantamento exaustivo de todo o noticiário.</p>
@@ -190,4 +157,7 @@ footer{padding-block:40px 56px;color:var(--muted);font-size:14px}
 
   <footer><p>Atualizado em 12 de outubro de 2026 (Tóquio). Segundo turno: 25 de outubro de 2026.</p></footer>
 </main>
+<script>
+document.querySelectorAll('.shelf').forEach(sh=>{const row=sh.querySelector('.row');sh.querySelectorAll('.ar').forEach(b=>b.addEventListener('click',()=>{row.scrollBy({left:(+b.dataset.d)*row.clientWidth*.9,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}))});
+</script>
 </body></html>
