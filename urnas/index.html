@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Rota das Urnas</title>
+<meta name="description" content="1º turno × 2º turno da eleição para presidente de 2026: o que mudou, o que ficou igual, região por região e país por país, com os números do TSE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: o esqueleto das Rotas no formato fácil. Cor própria da rota: verde-cinza da urna.
+   Os dois candidatos usam cores neutras (nem vermelho nem verde-amarelo), as mesmas em todo o site.
+   Ordem: pergunta → resposta curta → como comparar → votos em disputa → regiões → exterior → Japão → resumo → números. */
+:root{
+  --bg:#eef0ee; --paper:#fbfcfb; --ink:#1b1f1c; --muted:#59605b; --line:#d2d8d3; --soft:#e3e8e4;
+  --accent:#3c5a48; --accent-soft:#dce8e0;
+  --lula:#6d3fc7; --flavio:#0d7f86; --outros:#9a9fa0;
+  --ok:#1f6b45; --ok-soft:#dcefe3; --no:#a12a2a; --no-soft:#f6dede; --part:#7a5a00; --part-soft:#f6ebc9;
+  --display:"Archivo","Arial Narrow",Impact,sans-serif;
+  --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111412; --paper:#181c19; --ink:#e7ece8; --muted:#9fa8a2; --line:#2b322d; --soft:#222824;
+  --accent:#8cc4a2; --accent-soft:#1b2a21;
+  --lula:#a98bf0; --flavio:#3fbfc6; --outros:#6f7573;
+  --ok:#7fd3a3; --ok-soft:#173326; --no:#f19b9b; --no-soft:#3a1c1c; --part:#e8c25a; --part-soft:#3a3016; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111412; --paper:#181c19; --ink:#e7ece8; --muted:#9fa8a2; --line:#2b322d; --soft:#222824;
+  --accent:#8cc4a2; --accent-soft:#1b2a21;
+  --lula:#a98bf0; --flavio:#3fbfc6; --outros:#6f7573;
+  --ok:#7fd3a3; --ok-soft:#173326; --no:#f19b9b; --no-soft:#3a1c1c; --part:#e8c25a; --part-soft:#3a3016; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:19px;line-height:1.7}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px}
+.kicker,.mono{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.kicker{color:var(--accent)}
+h1{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(46px,11vw,104px);line-height:.9;margin:0;text-transform:uppercase;overflow-wrap:anywhere}
+h2{font-family:var(--display);font-stretch:66%;font-weight:800;font-size:clamp(34px,7vw,52px);line-height:.95;margin:0;text-transform:uppercase;text-wrap:balance}
+h3{font-family:var(--ui);font-weight:700;font-size:22px;line-height:1.2;margin:0;text-wrap:balance}
+p{margin:0}
+header,section{display:grid;grid-template-columns:minmax(0,1fr)}
+header{padding-block:40px 8px;gap:18px}
+section{padding-block:48px 8px;gap:18px}
+.lg{font-size:21px;line-height:1.6}
+.sub{color:var(--muted);max-width:62ch}
+.src{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 14px;line-height:1.5}
+.src a{color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px;display:grid;gap:12px;align-content:start}
+.answer-box{background:var(--accent-soft);border:2px solid var(--accent);border-radius:6px;padding:20px;margin-top:40px}
+.live{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-family:var(--ui);font-size:16px;font-weight:600;background:var(--paper);border:1px dashed var(--accent);border-radius:6px;padding:10px 14px}
+.live .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.live .dot{animation:none}}
+
+/* legenda dos candidatos */
+.who{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--ui);font-weight:600;font-size:16px}
+.who i{display:inline-block;width:14px;height:14px;border-radius:3px;background:var(--c);margin-right:6px;vertical-align:-2px}
+
+/* barra dividida */
+.split{display:grid;gap:4px}
+.split .lab{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.bar{display:flex;height:30px;border-radius:3px;overflow:hidden;background:var(--soft)}
+.bar span{display:flex;align-items:center;padding-inline:8px;color:#fff;font-family:var(--mono);font-weight:600;font-size:13px;white-space:nowrap;min-width:0;overflow:hidden}
+.bar .l{background:var(--lula)} .bar .f{background:var(--flavio);justify-content:flex-end} .bar .o{background:var(--outros);justify-content:center}
+.bar.wait{background:repeating-linear-gradient(45deg,var(--soft) 0 10px,transparent 10px 20px);border:1px dashed var(--line);justify-content:center;align-items:center;font-family:var(--ui);font-size:14px;font-weight:600;color:var(--muted)}
+
+/* grade de regiões / lugares */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:12px}
+.place h3{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.place h3 small{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--ui);font-weight:700;font-size:14px;padding:3px 10px;border-radius:999px;border:2px solid var(--c);color:var(--c);background:var(--paper)}
+.delta{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.delta div{background:var(--soft);border-radius:4px;padding:8px 10px;display:grid;gap:0}
+.delta b{font-family:var(--display);font-stretch:66%;font-weight:800;font-size:28px;line-height:1.1;color:var(--c)}
+.delta span{font-family:var(--ui);font-size:14px;color:var(--muted)}
+.note{font-size:15px;color:var(--muted);line-height:1.5}
+.badge{justify-self:start;font-family:var(--ui);font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+.badge.doc{background:var(--ok-soft);color:var(--ok);border:2px solid var(--ok)}
+.badge.aberto{background:var(--part-soft);color:var(--part);border:2px solid var(--part)}
+.badge.alegacao{background:var(--no-soft);color:var(--no);border:2px solid var(--no)}
+
+/* votos em disputa */
+.pool{display:grid;gap:8px}
+.pool .r{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center}
+.pool .r .t{grid-column:1/-1;height:16px;background:var(--soft);border-radius:3px;overflow:hidden}
+.pool .r .t i{display:block;height:100%;background:var(--outros)}
+.pool .r b{font-family:var(--ui);font-size:17px} .pool .r span{font-family:var(--mono);font-size:14px;color:var(--muted)}
+.big{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:clamp(56px,12vw,88px);line-height:.9;color:var(--accent)}
+
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.how .card .n{font-family:var(--display);font-stretch:62%;font-weight:900;font-size:44px;line-height:.9;color:var(--accent)}
+
+.verdict{background:var(--ink);color:var(--paper);border-radius:6px;padding:22px 20px;display:grid;gap:12px}
+.verdict h2{color:var(--paper)}
+.verdict ul{margin:0;padding-left:20px;display:grid;gap:8px;font-size:20px}
+details.mais{margin-top:44px;border:2px solid var(--line);border-radius:6px;background:var(--paper)}
+details.mais>summary{cursor:pointer;padding:18px 20px;font-family:var(--ui);font-weight:700;font-size:19px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.mais>summary::after{content:"+";font-family:var(--mono);font-size:24px;line-height:1}
+details.mais[open]>summary::after{content:"−"}
+details.mais>summary::-webkit-details-marker{display:none}
+.mais-body{padding:0 20px 20px;font-size:17px;line-height:1.6;display:grid;gap:14px;overflow-x:auto}
+.mais-body table{width:100%;border-collapse:collapse;font-size:15px}
+.mais-body th,.mais-body td{text-align:left;padding:8px 6px;border-top:1px solid var(--line);vertical-align:top}
+.mais-body th{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.mais-body td.n{font-family:var(--mono);white-space:nowrap;text-align:right}
+footer{padding-block:44px 60px;color:var(--muted);font-size:14px;display:grid;gap:8px}
+</style>
+</head><body>
+
+<style>/* barra comum das Rotas */.rotas-bar{border-bottom:1px solid var(--line);background:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}.rotas-bar>div{max-width:880px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}.rotas-bar a{color:var(--muted);text-decoration:none;padding-block:2px;border-bottom:2px solid transparent}.rotas-bar a:hover{color:var(--ink)}.rotas-bar a[aria-current]{color:var(--ink);border-bottom-color:var(--accent)}.rotas-bar .rb-home{color:var(--accent);font-weight:600}.rotas-bar a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}</style><nav class="rotas-bar" aria-label="Rotas"><div><a class="rb-home" href="https://fcarvalhodev.github.io/rotas/">Rotas</a><a href="https://fcarvalhodev.github.io/rotas/urnas/" aria-current="page">Urnas</a><a href="https://fcarvalhodev.github.io/rota-washington/">Washington</a><a href="https://fcarvalhodev.github.io/rota-master/">Master</a><a href="https://fcarvalhodev.github.io/rota-curitiba/">Curitiba</a><a href="https://fcarvalhodev.github.io/rota-da-fe/">Fé</a><a href="https://fcarvalhodev.github.io/rota-esplanada/">Esplanada</a><a href="https://fcarvalhodev.github.io/rota-itamaraty/">Itamaraty</a><a href="https://fcarvalhodev.github.io/rota-da-picanha/">Picanha</a><a href="https://fcarvalhodev.github.io/rota-do-ibge/">IBGE</a><a href="https://fcarvalhodev.github.io/rota-velho-chico/">Velho Chico</a><a href="https://fcarvalhodev.github.io/rota-do-tesouro/">Tesouro</a><a href="https://fcarvalhodev.github.io/rota-rouanet/">Rouanet</a><a href="https://fcarvalhodev.github.io/rota-dos-ventos/">Ventos</a><a href="https://fcarvalhodev.github.io/rota-do-algoritmo/">Algoritmo</a><a href="https://fcarvalhodev.github.io/rota-do-posto/">Posto</a><a href="https://fcarvalhodev.github.io/rota-das-queimadas/">Queimadas</a><a href="https://fcarvalhodev.github.io/rota-dos-games/">Games</a><a href="https://fcarvalhodev.github.io/rota-do-contracheque/">Contracheque</a><a href="https://fcarvalhodev.github.io/rota-palantir/">Palantir</a></div></nav>
+
+<header class="wrap">
+  <div class="kicker">Rota das Urnas</div>
+  <h1>1º turno × 2º turno</h1>
+  <p class="lg">Em 4 de outubro, Flávio Bolsonaro (PL) ficou em primeiro e Lula (PT) em segundo. Hoje os dois se enfrentam de novo. Aqui você vê, lugar por lugar, o que mudou e o que ficou igual.</p>
+  <div class="live" role="status"><span class="dot" aria-hidden="true"></span><span>Até agora só há urnas do exterior. O TSE divulga o Brasil a partir das <b>17h de Brasília</b> (5h de segunda no Japão).</span></div>
+  <div class="who"><span style="--c:var(--lula)"><i></i>Lula (PT)</span><span style="--c:var(--flavio)"><i></i>Flávio Bolsonaro (PL)</span><span style="--c:var(--outros)"><i></i>Outros candidatos (só no 1º turno)</span></div>
+</header>
+
+<main class="wrap">
+
+<section class="answer-box" aria-labelledby="h-curta">
+  <h2 id="h-curta">A resposta curta (por enquanto)</h2>
+  <p class="lg">Nos lugares do exterior que já contaram os votos, <b>ninguém virou</b>: quem ganhou no 1º turno continua na frente. <b>Os dois candidatos ganharam votos</b> em quase todo lugar, porque agora não há outros nomes na urna. A balança mexeu pouco, no máximo uns 3 pontos, às vezes para um lado, às vezes para o outro.</p>
+</section>
+
+<section aria-labelledby="h-como">
+  <h2 id="h-como">Como comparar sem enganar</h2>
+  <p class="sub lg">No 1º turno havia 13 candidatos. No 2º, só dois. Por isso a porcentagem de cada um sempre sobe, e isso sozinho não quer dizer nada. A página usa duas contas mais justas:</p>
+  <div class="how">
+    <div class="card"><span class="n">Conta 1</span><h3>A balança entre os dois</h3><p>No 1º turno, olhamos só os votos de Lula e Flávio, como se fossem 100%. Depois comparamos com o 2º turno. Se a balança mexeu menos de 1 ponto, a página diz <b>“manteve”</b>.</p></div>
+    <div class="card"><span class="n">Conta 2</span><h3>Votos de verdade</h3><p>Quantos votos <b>a mais ou a menos</b> cada um teve. Assim dá para ver se os dois cresceram, se só um cresceu ou se alguém perdeu votos.</p></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-disputa">
+  <h2 id="h-disputa">Os votos que estão em jogo</h2>
+  <p class="sub lg">No 1º turno, <b>9,3 milhões</b> de votos válidos foram para outros candidatos. Hoje esses eleitores escolhem entre os dois, votam branco ou nulo, ou não vão votar.</p>
+  <div class="card">
+    <span class="big" id="gap"></span>
+    <p id="gap-txt"></p>
+    <div class="pool" id="pool"></div>
+    <span class="src"><a href="https://sig.tse.jus.br/ords/dwapr/r/seai/sig-eleicao-resultados/resultado-da-elei%C3%A7%C3%A3o" target="_blank" rel="noopener">TSE: votação nominal do 1º turno</a></span>
+  </div>
+</section>
+
+<section aria-labelledby="h-regioes">
+  <h2 id="h-regioes">Brasil, região por região</h2>
+  <p class="sub lg">No 1º turno, Lula ganhou no Nordeste e Flávio nas outras quatro regiões. A barra cinza é o voto em outros candidatos, que agora vai se dividir.</p>
+  <div class="grid" id="regioes"></div>
+  <span class="src"><a href="https://hubpolitico.com.br/eleicoes/2026/apuracao/presidente/regioes" target="_blank" rel="noopener">Hub Político: resultado por região (dados do TSE)</a><a href="https://www.congressoemfoco.com.br/noticia/122894/flavio-vence-em-quatro-regioes-lula-domina-nordeste" target="_blank" rel="noopener">Congresso em Foco: regiões</a><a href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener">TSE: resultados</a></span>
+</section>
+
+<section aria-labelledby="h-exterior">
+  <h2 id="h-exterior">O exterior, país por país</h2>
+  <p class="sub lg">No 1º turno, Lula teve mais votos fora do Brasil no total (157 mil a 144 mil). Flávio ganhou com folga nos Estados Unidos e no Japão; Lula, em Portugal, no Canadá e na maior parte da Europa.</p>
+  <div class="who" style="font-size:14px"><span><span class="badge doc">Documentado</span> resultado completo</span><span><span class="badge aberto">Em aberto</span> parcial ou soma de boletins</span><span><span class="badge alegacao">Alegação</span> ainda sem confirmação</span></div>
+  <div class="grid" id="lugares"></div>
+  <span class="src"><a href="https://www.infomoney.com.br/politica/eleicoes-2026-como-foram-as-votacoes-nos-paises-no-primeiro-turno/" target="_blank" rel="noopener">InfoMoney: exterior no 1º turno</a><a href="https://www.cnnbrasil.com.br/eleicoes/flavio-vence-nos-eua-e-japao-lula-na-argentina-e-portugal-veja-divisao/" target="_blank" rel="noopener">CNN: EUA, Portugal, Japão, Canadá</a><a href="https://portalmie.com/atualidade/2026/10/eleicoes-2026-veja-como-brasileiros-votaram-no-japao-e-pelo-mundo/" target="_blank" rel="noopener">Portal Mie: Japão no 1º turno</a><a href="https://exame.com/brasil/votacao-para-presidente-no-exterior-veja-quem-venceu-no-japao-china-e-nova-zelandia/" target="_blank" rel="noopener">Exame: Ásia no 1º turno</a><a href="https://www.metropoles.com/mundo/votacao-no-exterior-lula-sai-na-frente-de-flavio-em-apuracao-parcial" target="_blank" rel="noopener">Metrópoles: 2º turno parcial</a><a href="https://www.cnnbrasil.com.br/eleicoes/na-coreia-do-sul-lula-tem-643-no-2o-turno-flavio-356/" target="_blank" rel="noopener">CNN: Coreia do Sul</a><a href="https://www.jairsampaio.com/flavio-bolsonaro-amplia-votacao-no-japao-e-supera-81-dos-votos-validos-em-hamamatsu-e-nagoya-no-2o-turno/" target="_blank" rel="noopener">Jair Sampaio: Nagoia e Hamamatsu no 2º turno</a><a href="https://www.diariodocentrodomundo.com.br/primeiros-votos-apurados-lula-vence-flavio-na-nova-zelandia-e-lidera-em-sydney" target="_blank" rel="noopener">DCM: Nova Zelândia e Sydney</a></span>
+</section>
+
+<section aria-labelledby="h-japao">
+  <h2 id="h-japao">O caso do Japão</h2>
+  <p class="lg">O Japão é o 3º maior eleitorado brasileiro fora do país, com 88 mil eleitores. Em Nagoia e Hamamatsu, <b>Flávio ganhou mais votos</b> (cerca de 2.600 a mais) do que Lula (cerca de 1.200 a mais). Mas, em proporção, <b>Lula cresceu mais</b>: a fatia dele entre os dois subiu uns 2,5 pontos. Por isso as duas manchetes do dia estão certas ao mesmo tempo: “Flávio amplia votação” e “Lula sobe”.</p>
+  <p class="note">No 1º turno, a participação no Japão foi de 41,5% (36.627 de 88.293 eleitores). Tóquio ainda não aparece somado nas fontes consultadas.</p>
+</section>
+
+<section aria-labelledby="h-resumo">
+  <div class="verdict">
+    <h2 id="h-resumo">Resumindo</h2>
+    <ul>
+      <li>No 1º turno, Flávio terminou <b>2,2 milhões de votos</b> à frente.</li>
+      <li><b>9,3 milhões</b> de votos de outros candidatos estão em disputa.</li>
+      <li>No exterior, até agora, <b>nenhum país virou</b> e os dois cresceram em votos.</li>
+      <li>O que vale de verdade é o Brasil: a partir das 17h de Brasília esta página ganha os números das regiões.</li>
+    </ul>
+  </div>
+</section>
+
+<details class="mais">
+  <summary>Quer ver todos os números? Toque aqui</summary>
+  <div class="mais-body">
+    <h3>Tabela completa</h3>
+    <table id="tabela"></table>
+    <p class="note">“Balança” = votos de Lula ÷ (Lula + Flávio). No 1º turno de Sydney só existe a porcentagem; a balança foi calculada com ela. Os números do 2º turno no exterior vêm de somas de boletins de urna publicadas pela imprensa e podem mudar um pouco na totalização oficial do TSE.</p>
+  </div>
+</details>
+
+<footer>
+  <p>Números do 1º turno: TSE, 100% das seções. Números do 2º turno: parciais, com a fonte ao lado de cada um.</p>
+  <p id="upd"></p>
+</footer>
+
+<section id="fontes-revisao" aria-labelledby="h-fontes-revisao" style="margin-block:32px;padding:20px;border:1px solid var(--line);border-radius:6px">
+<h2 id="h-fontes-revisao">Fontes e limites da leitura</h2>
+<p>Esta página compara números, não explica por que alguém mudou o voto. Diferença entre turnos pode vir de quem trocou de candidato, de quem votou em outro nome no 1º turno ou de quem foi (ou não foi) votar. Na China, o recorte de cidades do 1º turno pode não ser o mesmo do 2º. O número de Sydney é uma alegação até ser confirmado.</p>
+<div class="src"><a href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener">TSE: resultados oficiais</a><a href="https://www.otempo.com.br/eleicoes/2026/analises/mapa-dos-votos/exterior" target="_blank" rel="noopener">O Tempo: eleitorado por país</a></div>
+<p style="font-size:14px"><a href="https://fcarvalhodev.github.io/rotas/metodologia.html">Como distinguimos fatos, alegações e interpretações</a></p>
+</section>
+</main>
+
+<script src="dados.js"></script>
+<script>
+(function(){
+const D=window.URNAS;
+const fmt=n=>Math.round(n).toLocaleString('pt-BR');
+const pc=n=>n.toFixed(1).replace('.',',');
+const sgn=n=>(n>0?'+':n<0?'−':'')+fmt(Math.abs(n));
+const LBL={doc:'Documentado',aberto:'Em aberto',alegacao:'Alegação'};
+
+// balança Lula entre os dois (0–100)
+function share(t){ if(!t) return null; if(t.l!=null&&t.f!=null) return t.l/(t.l+t.f)*100; if(t.lp!=null) return t.lp/(t.lp+t.fp)*100; return null; }
+
+function bar(label,t,withOthers){
+  if(!t) return `<div class="split"><div class="lab"><span>${label}</span></div><div class="bar wait">aguardando</div></div>`;
+  let l,f,o=0;
+  if(withOthers&&t.lp!=null){ l=t.lp; f=t.fp; o=Math.max(0,100-l-f); }
+  else { const s=share(t); l=s; f=100-s; }
+  return `<div class="split"><div class="lab"><span>${label}</span><span>${withOthers&&o?'com outros':'só os dois'}</span></div>
+  <div class="bar" role="img" aria-label="${label}: Lula ${pc(l)}%, Flávio ${pc(f)}%${o?`, outros ${pc(o)}%`:''}">
+  <span class="l" style="width:${l}%">${pc(l)}%</span>${o?`<span class="o" style="width:${o}%">${o>8?pc(o)+'%':''}</span>`:''}<span class="f" style="width:${f}%">${pc(f)}%</span></div></div>`;
+}
+
+function verdict(t1,t2){
+  const out=[]; if(!t1||!t2) return out;
+  const s1=share(t1), s2=share(t2), d=s2-s1;
+  const lead1=s1>=50?'Lula':'Flávio', lead2=s2>=50?'Lula':'Flávio';
+  if(lead1!==lead2) out.push(['Virou para '+lead2,'var(--no)']); else out.push([lead1+' continua na frente','var(--muted)']);
+  if(Math.abs(d)<1) out.push(['Manteve o equilíbrio','var(--accent)']);
+  else out.push([`Pendeu ${pc(Math.abs(d))} pt para ${d>0?'Lula':'Flávio'}`, d>0?'var(--lula)':'var(--flavio)']);
+  if(t1.l!=null&&t2.l!=null){
+    const dl=t2.l-t1.l, df=t2.f-t1.f;
+    if(dl>0&&df>0) out.push(['Os dois ganharam votos','var(--ok)']);
+    else if(dl>0) out.push(['Só Lula ganhou votos','var(--lula)']);
+    else if(df>0) out.push(['Só Flávio ganhou votos','var(--flavio)']);
+    else out.push(['Os dois perderam votos','var(--no)']);
+  }
+  return out;
+}
+
+function deltas(t1,t2){
+  if(!t1||!t2||t1.l==null||t2.l==null) return '';
+  return `<div class="delta"><div style="--c:var(--lula)"><b>${sgn(t2.l-t1.l)}</b><span>votos para Lula</span></div><div style="--c:var(--flavio)"><b>${sgn(t2.f-t1.f)}</b><span>votos para Flávio</span></div></div>`;
+}
+
+function card(name,small,t1,t2,withOthers,extra){
+  const tags=verdict(t1,t2).map(([t,c])=>`<span class="tag" style="--c:${c}">${t}</span>`).join('');
+  return `<article class="card place"><h3>${name}<small>${small||''}</small></h3>
+  ${bar('1º turno · 4 out',t1,withOthers)}${bar('2º turno · 25 out',t2,false)}
+  ${tags?`<div class="tags">${tags}</div>`:''}${deltas(t1,t2)}${extra||''}</article>`;
+}
+
+// votos em disputa
+const B=D.brasil.t1, others=B.validos-B.f-B.l;
+document.getElementById('gap').textContent=fmt(others);
+document.getElementById('gap-txt').innerHTML=`votos foram para outros candidatos. A vantagem de Flávio sobre Lula no 1º turno foi de <b>${fmt(B.f-B.l)}</b> votos.`;
+const mx=D.outros[0][1];
+document.getElementById('pool').innerHTML=D.outros.map(([n,v])=>`<div class="r"><b>${n}</b><span>${fmt(v)}</span><div class="t"><i style="width:${v/mx*100}%"></i></div></div>`).join('');
+
+// regiões
+document.getElementById('regioes').innerHTML=
+  card('Brasil inteiro','',{l:B.l,f:B.f,lp:B.l/B.validos*100,fp:B.f/B.validos*100},D.brasil.t2,true)+
+  D.regioes.map(r=>{
+    const val=r.t1.f/(r.t1.fp/100), oth=val-r.t1.f-r.t1.l;
+    return card(r.nome,r.estados+' estados',r.t1,r.t2,true,`<p class="note">Em disputa na região: cerca de ${fmt(Math.round(oth/1000)*1000)} votos de outros candidatos.</p>`);
+  }).join('');
+
+// exterior
+const ext=D.exterior;
+document.getElementById('lugares').innerHTML=
+  card('Exterior inteiro','134 países',ext.t1,ext.t2,true,'<p class="note">Total oficial do 2º turno sai com a totalização do TSE.</p>')+
+  D.lugares.map(p=>card(p.nome,p.grupo,p.t1,p.t2,false,`<span class="badge ${p.status}">${LBL[p.status]}</span>${p.nota?`<p class="note">${p.nota}</p>`:''}`)).join('');
+
+// tabela
+const rows=[['Brasil',{l:B.l,f:B.f},D.brasil.t2]].concat(D.regioes.map(r=>[r.nome,r.t1,r.t2]),[['Exterior',ext.t1,ext.t2]],D.lugares.map(p=>[p.nome,p.t1,p.t2]));
+const cell=(t,k)=>t&&t[k]!=null?fmt(t[k]):'—';
+document.getElementById('tabela').innerHTML=`<tr><th>Lugar</th><th>Lula 1º</th><th>Flávio 1º</th><th>Lula 2º</th><th>Flávio 2º</th><th>Balança 1º → 2º</th></tr>`+
+  rows.map(([n,a,b])=>{const s1=share(a),s2=share(b);return `<tr><td>${n}</td><td class="n">${cell(a,'l')}</td><td class="n">${cell(a,'f')}</td><td class="n">${cell(b,'l')}</td><td class="n">${cell(b,'f')}</td><td class="n">${s1!=null?pc(s1)+'%':'—'} → ${s2!=null?pc(s2)+'%':'—'}</td></tr>`}).join('');
+
+document.getElementById('upd').textContent='Atualizado em '+D.atualizado+'.';
+})();
+</script>
+</body></html>
